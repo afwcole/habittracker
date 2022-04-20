@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/widgets/home_habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
 import 'package:habittracker/widgets/horizontal_date_widget.dart';
 
@@ -46,7 +47,7 @@ Widget mainBody(BuildContext context) {
               spacingBetweenDates: 8,
               minSelectedDateCount: 1,
               maxSelectedDateCount: 1,
-              initialSelectedDates: [DateTime(2022, 4, 16)],
+              initialSelectedDates: [DateTime(2022, 4, 19)],
             ),
             const SizedBox(height: 39),
             Text(
@@ -66,136 +67,19 @@ Widget mainBody(BuildContext context) {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 25,
+            ),
+            const HomeHabitCard(),
             const SizedBox(height: 25),
-            homeHabitCard(context, false),
+            const HomeHabitCard(),
             const SizedBox(height: 25),
-            homeHabitCard(context, true),
+            const HomeHabitCard(),
             const SizedBox(height: 25),
-            homeHabitCard(context, false),
-            const SizedBox(height: 25),
-            homeHabitCard(context, false),
+            const HomeHabitCard(),
             const SizedBox(height: 25),
           ],
         )),
-  );
-}
-
-Widget homeHabitCard(BuildContext context, bool dropdownActive) {
-  return Container(
-    padding: const EdgeInsets.all(22),
-    child: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Eat Breakfast",
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Daily",
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            IconButton(
-              icon: const Icon(Icons.keyboard_arrow_down_rounded,
-                  color: Color(0xFF7856CE)),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        const SizedBox(height: 9),
-        Row(
-          children: [
-            cardDateIcon(context, "M", const Color(0xFFB3D264), false),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "T", const Color(0xFFE85F4D), false),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "W", const Color(0xFFB3D264), true),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "T", const Color(0xFFB3D264), false),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "F", const Color(0xFFB3D264), false),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "S", const Color(0xFFB3D264), false),
-            const SizedBox(
-              width: 18,
-            ),
-            cardDateIcon(context, "S", const Color(0xFFB3D264), false),
-          ],
-        ),
-        const SizedBox(height: 25),
-        Row(
-          children: [
-            habitCardButtons(context, true),
-            const SizedBox(
-              width: 15,
-            ),
-            habitCardButtons(context, false),
-            const SizedBox(
-              width: 15,
-            ),
-            Container(
-              child: IconButton(
-                  icon: const Icon(
-                    Icons.equalizer,
-                  ),
-                  onPressed: () {},
-                  color: Colors.white,
-                  iconSize: 19),
-              decoration: const BoxDecoration(
-                  color: Color(0xFF7856CE),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0x337856CE),
-                      blurRadius: 24,
-                      offset: Offset(0, 8),
-                    ),
-                  ]),
-            ),
-          ],
-        ),
-      ],
-    ),
-    decoration: const BoxDecoration(
-        color: Color(0xFFDDD0FC),
-        borderRadius: BorderRadius.all(
-          Radius.circular(25),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x337856CE),
-            blurRadius: 24,
-            offset: Offset(0, 8),
-          ),
-        ]),
   );
 }
 

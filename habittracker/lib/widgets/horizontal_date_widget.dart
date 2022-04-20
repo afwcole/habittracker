@@ -36,7 +36,7 @@ class HorizontalDateWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              weekdayToISOString(date.weekday),
+              weekdayToISOString(date.weekday, 3),
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 12,
