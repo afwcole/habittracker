@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/widgets/home_habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
-import 'package:habittracker/widgets/horizontal_date_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
