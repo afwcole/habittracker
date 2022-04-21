@@ -11,6 +11,9 @@ class HomeHabitCard extends StatefulWidget {
 }
 
 class _HomeHabitCardState extends State<HomeHabitCard> {
+  final habitName = "Eat Breakfast";
+  final habitFrequency = "Daily";
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +44,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Eat Breakfast",
+                habitName,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 14,
@@ -51,7 +54,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
                 ),
               ),
               Text(
-                "Daily",
+                habitFrequency,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 12,
@@ -63,10 +66,18 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
             ],
           ),
         ),
-        collapsed: weeklyStreak(context),
+        collapsed: weeklyStreak(
+          context,
+          DateTime(2022, 4, 15),
+          DateTime.now(),
+        ),
         expanded: Column(
           children: [
-            weeklyStreak(context),
+            weeklyStreak(
+              context,
+              DateTime(2022, 4, 15),
+              DateTime.now(),
+            ),
             habitCardButtonRow(context),
           ],
         ),
@@ -107,16 +118,9 @@ Widget habitCardButtonRow(BuildContext context) {
   );
 }
 
-Widget weeklyStreak(BuildContext context) {
-  List<DateTime> weekList = [
-    DateTime(2022, 4, 13),
-    DateTime(2022, 4, 14),
-    DateTime(2022, 4, 15),
-    DateTime(2022, 4, 16),
-    DateTime(2022, 4, 17),
-    DateTime(2022, 4, 18),
-    DateTime(2022, 4, 19)
-  ];
+Widget weeklyStreak(
+    BuildContext context, DateTime firstDate, DateTime lastDate) {
+  List<DateTime> weekList = getDateList(firstDate, lastDate);
 
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 9, 20, 20),

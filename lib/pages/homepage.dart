@@ -9,171 +9,109 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: mainBody(context),
+      extendBody: true,
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        backgroundColor: const Color(0xFFB3D264),
+        onPressed: () {},
+        child: const Icon(
+          Icons.add,
+          size: 32,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 20,
+        color: const Color(0xFF7856CE),
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 6,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              padding: const EdgeInsets.all(15),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.equalizer,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
 Widget mainBody(BuildContext context) {
-  return SafeArea(
-    child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 36),
-            Text(
-              "Habits",
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 32,
-                  color: Color(0xFF7856CE),
-                  fontWeight: FontWeight.w800,
+  return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 36),
+          Text(
+            "Habits",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 32,
+                color: Color(0xFF7856CE),
+                fontWeight: FontWeight.w800,
+              ),
+              shadows: <Shadow>[
+                const Shadow(
+                  offset: Offset(0, 8),
+                  blurRadius: 24,
+                  color: Color(0x337856CE),
                 ),
-                shadows: <Shadow>[
-                  const Shadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: Color(0x337856CE),
-                  ),
-                ],
+              ],
+            ),
+          ),
+          const SizedBox(height: 36),
+          HorizontalCalendar(
+            firstDate: DateTime(2022, 4, 13),
+            lastDate: DateTime(2022, 4, 19),
+            spacingBetweenDates: 8,
+            minSelectedDateCount: 1,
+            maxSelectedDateCount: 1,
+            initialSelectedDates: [DateTime(2022, 4, 19)],
+          ),
+          const SizedBox(height: 39),
+          Text(
+            "Streaks",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 24,
+                color: Color(0xFF7856CE),
+                fontWeight: FontWeight.w600,
               ),
-            ),
-            const SizedBox(height: 36),
-            HorizontalCalendar(
-              firstDate: DateTime(2022, 4, 13),
-              lastDate: DateTime(2022, 4, 19),
-              spacingBetweenDates: 8,
-              minSelectedDateCount: 1,
-              maxSelectedDateCount: 1,
-              initialSelectedDates: [DateTime(2022, 4, 19)],
-            ),
-            const SizedBox(height: 39),
-            Text(
-              "Streaks",
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 24,
-                  color: Color(0xFF7856CE),
-                  fontWeight: FontWeight.w600,
+              shadows: <Shadow>[
+                const Shadow(
+                  offset: Offset(0, 8),
+                  blurRadius: 24,
+                  color: Color(0x337856CE),
                 ),
-                shadows: <Shadow>[
-                  const Shadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: Color(0x337856CE),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            const HomeHabitCard(),
-            const SizedBox(height: 25),
-            const HomeHabitCard(),
-            const SizedBox(height: 25),
-            const HomeHabitCard(),
-            const SizedBox(height: 25),
-            const HomeHabitCard(),
-            const SizedBox(height: 25),
-          ],
-        )),
-  );
-}
-
-Widget cardDateIcon(
-    BuildContext context, String day, Color iconColor, bool isBorderOn) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text(
-        day,
-        style: GoogleFonts.poppins(
-          textStyle: const TextStyle(
-            fontSize: 14,
-            color: Color(0xFF7856CE),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      const SizedBox(
-        height: 2,
-      ),
-      Container(
-        alignment: Alignment.center,
-        height: 26,
-        width: 26,
-        child: Text(
-          "11",
-          style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-              fontSize: 14,
-              color: isBorderOn ? const Color(0xFF7856CE) : Colors.white,
-              fontWeight: FontWeight.w600,
+              ],
             ),
           ),
-        ),
-        decoration: BoxDecoration(
-          border: isBorderOn
-              ? Border.all(
-                  color: const Color(0xFF7856CE),
-                  width: 2,
-                )
-              : null,
-          color: isBorderOn ? Colors.white : iconColor,
-          shape: BoxShape.circle,
-        ),
-      ),
-    ],
-  );
-}
-
-Widget habitCardButtons(
-  BuildContext context,
-  bool isCompletedButton,
-) {
-  return Container(
-    padding: const EdgeInsets.all(8),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        isCompletedButton
-            ? const Icon(
-                Icons.done,
-                color: Colors.white,
-                size: 19,
-              )
-            : const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 19,
-              ),
-        Text(
-          isCompletedButton ? "Completed" : "Uncompleted",
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
+          const SizedBox(
+            height: 25,
           ),
-        ),
-      ],
-    ),
-    decoration: BoxDecoration(
-        color: isCompletedButton
-            ? const Color(0xFFB3D264)
-            : const Color(0xFF7856CE),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(25),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x337856CE),
-            blurRadius: 24,
-            offset: Offset(0, 8),
-          ),
-        ]),
-  );
+          for (int i = 0; i < 3; i++)
+            Column(children: const [HomeHabitCard(), SizedBox(height: 25)]),
+          const SizedBox(
+            height: 80,
+          )
+        ],
+      ));
 }
