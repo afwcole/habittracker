@@ -29,7 +29,7 @@ class HorizontalDateWidget extends StatelessWidget {
       onLongPress: isDisabled ? null : onLongTap,
       child: Container(
         width: 40,
-        decoration: isSelected ? selectedDecoration() : defaultDecoration(),
+        decoration: isSelected ? _selectedDecoration() : _defaultDecoration(),
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 13),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -65,7 +65,7 @@ class HorizontalDateWidget extends StatelessWidget {
   }
 }
 
-Decoration selectedDecoration() {
+Decoration _selectedDecoration() {
   return BoxDecoration(
       color: Colors.white,
       border: Border.all(color: const Color(0xFF7856CE), width: 2),
@@ -79,7 +79,7 @@ Decoration selectedDecoration() {
       ]);
 }
 
-Decoration defaultDecoration() {
+Decoration _defaultDecoration() {
   return const BoxDecoration(
       color: Color(0xFFDDD0FC),
       borderRadius: BorderRadius.all(Radius.circular(25)),

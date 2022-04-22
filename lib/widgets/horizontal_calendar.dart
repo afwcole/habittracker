@@ -41,42 +41,28 @@ class _HorizontalCalendarState extends State<HorizontalCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height,
-      child: Center(
-        child: ListView.builder(
-            controller: ScrollController(),
-            scrollDirection: Axis.horizontal,
-            itemCount: allDates.length,
-            itemBuilder: (context, index) {
-              final date = allDates[index];
-              return Row(
-                children: [
-                  HorizontalDateWidget(
-                    date: date,
-                    isSelected: selectedDates.contains(date),
-                    onTap: () {
-                      if (!selectedDates.contains(date)) {
-                        if (widget.maxSelectedDateCount == 1 &&
-                            selectedDates.length == 1) {
-                          selectedDates.clear();
-                        } else if (widget.maxSelectedDateCount ==
-                            selectedDates.length) {
-                          return;
-                        }
-
-                        selectedDates.add(date);
-                      }
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    width: widget.spacingBetweenDates,
-                  )
-                ],
-              );
-            }),
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        for (int i = 0; i < allDates.length; i++)
+          HorizontalDateWidget(
+            date: allDates[i],
+            isSelected: selectedDates.contains(allDates[i]),
+            onTap: () {
+              if (!selectedDates.contains(allDates[i])) {
+                if (widget.maxSelectedDateCount == 1 &&
+                    selectedDates.length == 1) {
+                  selectedDates.clear();
+                } else if (widget.maxSelectedDateCount ==
+                    selectedDates.length) {
+                  return;
+                }
+                selectedDates.add(allDates[i]);
+              }
+              setState(() {});
+            },
+          ),
+      ],
     );
   }
 }

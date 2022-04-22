@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
 import 'package:habittracker/widgets/home_habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
 
@@ -15,7 +16,9 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         elevation: 10,
         backgroundColor: const Color(0xFFB3D264),
-        onPressed: () {},
+        onPressed: () {
+          createHabitBottomSheet(context);
+        },
         child: const Icon(
           Icons.add,
           size: 32,
