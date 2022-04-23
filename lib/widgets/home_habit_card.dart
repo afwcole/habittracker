@@ -31,15 +31,14 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
           ]),
       child: ExpandablePanel(
         theme: const ExpandableThemeData(
-          iconPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          iconPlacement: ExpandablePanelIconPlacement.right,
+          iconPadding: EdgeInsets.fromLTRB(0, 20, 20, 0),
           iconColor: Color(0xFF7856CE),
           inkWellBorderRadius: BorderRadius.all(
             Radius.circular(25),
           ),
         ),
         header: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -66,16 +65,20 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
             ],
           ),
         ),
-        collapsed: weeklyStreak(
-          context,
-          DateTime(2022, 4, 15),
-          DateTime.now(),
+        collapsed: Column(
+          children: [
+            weeklyStreak(
+              context,
+              DateTime(2022, 4, 17),
+              DateTime.now(),
+            ),
+          ],
         ),
         expanded: Column(
           children: [
             weeklyStreak(
               context,
-              DateTime(2022, 4, 15),
+              DateTime(2022, 4, 17),
               DateTime.now(),
             ),
             habitCardButtonRow(context),
@@ -87,8 +90,8 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
 }
 
 Widget habitCardButtonRow(BuildContext context) {
-  return Container(
-    margin: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -123,7 +126,7 @@ Widget weeklyStreak(
   List<DateTime> weekList = getDateList(firstDate, lastDate);
 
   return Container(
-    margin: const EdgeInsets.fromLTRB(20, 9, 20, 20),
+    margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

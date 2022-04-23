@@ -1,0 +1,11 @@
+Habit
+    habitName - String
+    frequency - String
+    startDate - DateTime
+    selectedFrequencyDays - List<int>
+    completedDays - List<DateTime>
+    UncompletedDays - List<DateTime>
+    breakDays - List<DateTime>
+    notifications - bool
+    
+

@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       extendBody: true,
       floatingActionButton: FloatingActionButton(
         elevation: 10,
-        backgroundColor: const Color(0xFFB3D264),
+        backgroundColor: const Color(0xFF7856CE), //const Color(0xFFB3D264),
         onPressed: () {
           createHabitBottomSheet(context);
         },
@@ -27,7 +27,8 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         elevation: 20,
-        color: const Color(0xFF7856CE),
+        color:
+            const Color(0xFFF9F7FF), //Colors.white, //const Color(0xFF7856CE),
         shape: const CircularNotchedRectangle(),
         notchMargin: 6,
         child: Row(
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(
                 Icons.home,
-                color: Colors.white,
+                color: const Color(0xFF7856CE),
               ),
               padding: const EdgeInsets.all(15),
               onPressed: () {},
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(
                 Icons.equalizer,
-                color: Colors.white,
+                color: const Color(0xFF7856CE),
               ),
               onPressed: () {},
             ),
@@ -81,6 +82,26 @@ Widget mainBody(BuildContext context) {
             ),
           ),
           const SizedBox(height: 36),
+          Text(
+            "January",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF7856CE),
+                fontWeight: FontWeight.w400,
+              ),
+              shadows: <Shadow>[
+                const Shadow(
+                  offset: Offset(0, 8),
+                  blurRadius: 24,
+                  color: Color(0x337856CE),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           HorizontalCalendar(
             firstDate: DateTime(2022, 4, 13),
             lastDate: DateTime(2022, 4, 19),
