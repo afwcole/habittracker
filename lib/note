@@ -1,4 +1,5 @@
 Habit
+    habitId - int
     habitName - String
     frequency - String
     startDate - DateTime
@@ -7,5 +8,11 @@ Habit
     UncompletedDays - List<DateTime>
     breakDays - List<DateTime>
     notifications - bool
-    
 
+HabitDate
+    date - DateTime
+    dayType - String (Completed, Uncompleted, Break)
+
+
+
+List<HabitDate> pastHabitDays
