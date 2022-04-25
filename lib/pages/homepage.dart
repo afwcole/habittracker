@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/models/habit.dart';
+import 'package:habittracker/models/habit_date.dart';
 import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
 import 'package:habittracker/widgets/home_habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
@@ -58,6 +60,8 @@ class HomePage extends StatelessWidget {
 }
 
 Widget mainBody(BuildContext context) {
+  List<Habit> usersHabits = Habit.fetchAll();
+
   return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -131,8 +135,18 @@ Widget mainBody(BuildContext context) {
           const SizedBox(
             height: 25,
           ),
-          for (int i = 0; i < 3; i++)
-            Column(children: const [HomeHabitCard(), SizedBox(height: 25)]),
+          Column(
+            children: [
+              ...usersHabits.map((habit) {
+                return Column(children: [
+                  HomeHabitCard(habit: habit),
+                  const SizedBox(
+                    height: 25,
+                  )
+                ]);
+              }),
+            ],
+          ),
           const SizedBox(
             height: 80,
           )

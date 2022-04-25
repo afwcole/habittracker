@@ -2,20 +2,23 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
+import 'package:habittracker/models/habit.dart';
+import 'package:habittracker/models/habit_date.dart';
 
 class HomeHabitCard extends StatefulWidget {
-  const HomeHabitCard({Key? key}) : super(key: key);
+  final Habit habit;
+  const HomeHabitCard({Key? key, required this.habit}) : super(key: key);
 
   @override
   State<HomeHabitCard> createState() => _HomeHabitCardState();
 }
 
 class _HomeHabitCardState extends State<HomeHabitCard> {
-  final habitName = "Eat Breakfast";
-  final habitFrequency = "Daily";
-
   @override
   Widget build(BuildContext context) {
+    final List<HabitDate> habitHistory = widget.habit.habitHistory;
+    final int noOfDaysInHistory = habitHistory.length;
+
     return Container(
       decoration: const BoxDecoration(
           color: Color(0xFFDDD0FC),
@@ -43,7 +46,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                habitName,
+                widget.habit.habitName,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 14,
@@ -53,7 +56,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
                 ),
               ),
               Text(
-                habitFrequency,
+                widget.habit.frequencyType,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 12,
@@ -69,8 +72,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
           children: [
             weeklyStreak(
               context,
-              DateTime(2022, 4, 17),
-              DateTime.now(),
+              widget.habit.habitHistory,
             ),
           ],
         ),
@@ -78,8 +80,7 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
           children: [
             weeklyStreak(
               context,
-              DateTime(2022, 4, 17),
-              DateTime.now(),
+              widget.habit.habitHistory,
             ),
             habitCardButtonRow(context),
           ],
@@ -121,17 +122,15 @@ Widget habitCardButtonRow(BuildContext context) {
   );
 }
 
-Widget weeklyStreak(
-    BuildContext context, DateTime firstDate, DateTime lastDate) {
-  List<DateTime> weekList = getDateList(firstDate, lastDate);
-
+Widget weeklyStreak(BuildContext context, List<HabitDate> habitHistory) {
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        for (DateTime dateTime in weekList)
-          cardDateIcon(context, dateTime, const Color(0xFFB3D264), false),
+        ...habitHistory
+            .getRange(habitHistory.length - 8, habitHistory.length - 1)
+            .map((habitDate) => cardDateIcon(context, habitDate)),
       ],
     ),
   );
@@ -186,13 +185,14 @@ Widget habitCardButtons(
   );
 }
 
-Widget cardDateIcon(
-    BuildContext context, DateTime dateTime, Color iconColor, bool isBorderOn) {
+Widget cardDateIcon(BuildContext context, HabitDate habitDate) {
+  Color iconColor = getDateIconColor(habitDate);
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Text(
-        weekdayToISOString(dateTime.weekday, 1),
+        weekdayToISOString(habitDate.date.weekday, 1),
         style: GoogleFonts.poppins(
           textStyle: const TextStyle(
             fontSize: 14,
@@ -209,23 +209,25 @@ Widget cardDateIcon(
         height: 26,
         width: 26,
         child: Text(
-          dateTime.day.toString(),
+          habitDate.date.day.toString(),
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               fontSize: 14,
-              color: isBorderOn ? const Color(0xFF7856CE) : Colors.white,
+              color: habitDate.activity == "Break"
+                  ? const Color(0xFF7856CE)
+                  : Colors.white,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         decoration: BoxDecoration(
-          border: isBorderOn
+          border: habitDate.activity == "Break"
               ? Border.all(
                   color: const Color(0xFF7856CE),
                   width: 2,
                 )
               : null,
-          color: isBorderOn ? Colors.white : iconColor,
+          color: iconColor,
           shape: BoxShape.circle,
         ),
       ),
