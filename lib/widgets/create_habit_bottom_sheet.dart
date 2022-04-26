@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/models/user_data_model.dart';
 import 'package:habittracker/widgets/frequency_option_widget.dart';
+import 'package:habittracker/widgets/simple_toggle.dart';
+import 'package:provider/provider.dart';
 
 Future createHabitBottomSheet(BuildContext context) {
   return showModalBottomSheet(
@@ -126,7 +129,10 @@ Future createHabitBottomSheet(BuildContext context) {
                   const SizedBox(
                     height: 10,
                   ),
-                  const SimpleToggle(),
+                  const SimpleToggle(
+                    label:
+                        "Would you like notifications to be on for this habt?",
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -140,7 +146,10 @@ Future createHabitBottomSheet(BuildContext context) {
               color: const Color(0xFFF9F7FF),
               padding: const EdgeInsets.all(20),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Provider.of<UserDataModel>(context, listen: false)
+                      .addHabitToList();
+                },
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Color(0xFF7856CE),
@@ -173,51 +182,4 @@ Future createHabitBottomSheet(BuildContext context) {
       ),
     ),
   );
-}
-
-class SimpleToggle extends StatefulWidget {
-  const SimpleToggle({Key? key}) : super(key: key);
-
-  @override
-  State<SimpleToggle> createState() => _SimpleToggleState();
-}
-
-class _SimpleToggleState extends State<SimpleToggle> {
-  bool isSwitched = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "Switch on notifications for this habit?",
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF7856CE),
-              fontWeight: FontWeight.w400,
-            ),
-            shadows: <Shadow>[
-              const Shadow(
-                offset: Offset(0, 8),
-                blurRadius: 24,
-                color: Color(0x337856CE),
-              ),
-            ],
-          ),
-        ),
-        Switch(
-          value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              isSwitched = value;
-            });
-          },
-          activeTrackColor: const Color(0xFFDDD0FC),
-          activeColor: const Color(0xFF7856CE),
-        ),
-      ],
-    );
-  }
 }

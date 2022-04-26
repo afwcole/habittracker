@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:habittracker/models/habit_date.dart';
+import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/models/habit_date_model.dart';
 
 List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
   List<DateTime> list = [];
@@ -25,7 +25,7 @@ String weekdayToISOString(int weekday, int noOfLetters) {
   return noOfLetters == 1 ? weekdays1[weekday - 1] : weekdays3[weekday - 1];
 }
 
-Color getDateIconColor(HabitDate habitDate) {
+Color getDateIconColor(HabitDateModel habitDate) {
   switch (habitDate.activity) {
     case "Completed":
       {
@@ -39,4 +39,18 @@ Color getDateIconColor(HabitDate habitDate) {
   }
 
   return Colors.white;
+}
+
+List<HabitDateModel> getWeeksHabitDates(
+    DateTime currentWeekStartDate, List<HabitDateModel> habitHistory) {
+  List<HabitDateModel> thisWeekHabitHistory = [];
+
+  for (var habitDate in habitHistory.reversed) {
+    if (habitDate.date.compareTo(currentWeekStartDate) < 0) {
+      return thisWeekHabitHistory;
+    }
+    thisWeekHabitHistory.add(habitDate);
+  }
+
+  return thisWeekHabitHistory;
 }

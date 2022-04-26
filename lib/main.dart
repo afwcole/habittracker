@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/models/user_data_model.dart';
 import 'package:habittracker/pages/homepage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   LicenseRegistry.addLicense(() async* {
@@ -10,7 +12,10 @@ void main() {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => UserDataModel(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

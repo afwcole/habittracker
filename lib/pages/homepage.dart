@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habittracker/models/habit.dart';
-import 'package:habittracker/models/habit_date.dart';
+import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/models/user_data_model.dart';
 import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
-import 'package:habittracker/widgets/home_habit_card.dart';
+import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,8 +30,7 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         elevation: 20,
-        color:
-            const Color(0xFFF9F7FF), //Colors.white, //const Color(0xFF7856CE),
+        color: const Color(0xFFF9F7FF),
         shape: const CircularNotchedRectangle(),
         notchMargin: 6,
         child: Row(
@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(
                 Icons.home,
-                color: const Color(0xFF7856CE),
+                color: Color(0xFF7856CE),
               ),
               padding: const EdgeInsets.all(15),
               onPressed: () {},
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(
                 Icons.equalizer,
-                color: const Color(0xFF7856CE),
+                color: Color(0xFF7856CE),
               ),
               onPressed: () {},
             ),
@@ -60,96 +60,98 @@ class HomePage extends StatelessWidget {
 }
 
 Widget mainBody(BuildContext context) {
-  List<Habit> usersHabits = Habit.fetchAll();
+  List<HabitModel> usersHabits = HabitModel.fetchAll();
 
-  return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 36),
-          Text(
-            "Habits",
-            style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                fontSize: 32,
-                color: Color(0xFF7856CE),
-                fontWeight: FontWeight.w800,
-              ),
-              shadows: <Shadow>[
-                const Shadow(
-                  offset: Offset(0, 8),
-                  blurRadius: 24,
-                  color: Color(0x337856CE),
+  return Consumer<UserDataModel>(
+    builder: (context, userData, child) => SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 36),
+            Text(
+              "Habits",
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  fontSize: 32,
+                  color: Color(0xFF7856CE),
+                  fontWeight: FontWeight.w800,
                 ),
+                shadows: <Shadow>[
+                  const Shadow(
+                    offset: Offset(0, 8),
+                    blurRadius: 24,
+                    color: Color(0x337856CE),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 36),
+            Text(
+              "January",
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF7856CE),
+                  fontWeight: FontWeight.w400,
+                ),
+                shadows: <Shadow>[
+                  const Shadow(
+                    offset: Offset(0, 8),
+                    blurRadius: 24,
+                    color: Color(0x337856CE),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            HorizontalCalendar(
+              firstDate: DateTime(2022, 4, 13),
+              lastDate: DateTime(2022, 4, 19),
+              spacingBetweenDates: 8,
+              minSelectedDateCount: 1,
+              maxSelectedDateCount: 1,
+              initialSelectedDates: [DateTime(2022, 4, 19)],
+            ),
+            const SizedBox(height: 39),
+            Text(
+              "Streaks",
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  fontSize: 24,
+                  color: Color(0xFF7856CE),
+                  fontWeight: FontWeight.w600,
+                ),
+                shadows: <Shadow>[
+                  const Shadow(
+                    offset: Offset(0, 8),
+                    blurRadius: 24,
+                    color: Color(0x337856CE),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Column(
+              children: [
+                ...userData.habitList.map((habit) {
+                  return Column(children: [
+                    HabitCard(habit: habit),
+                    const SizedBox(
+                      height: 25,
+                    )
+                  ]);
+                }),
               ],
             ),
-          ),
-          const SizedBox(height: 36),
-          Text(
-            "January",
-            style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                fontSize: 16,
-                color: Color(0xFF7856CE),
-                fontWeight: FontWeight.w400,
-              ),
-              shadows: <Shadow>[
-                const Shadow(
-                  offset: Offset(0, 8),
-                  blurRadius: 24,
-                  color: Color(0x337856CE),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          HorizontalCalendar(
-            firstDate: DateTime(2022, 4, 13),
-            lastDate: DateTime(2022, 4, 19),
-            spacingBetweenDates: 8,
-            minSelectedDateCount: 1,
-            maxSelectedDateCount: 1,
-            initialSelectedDates: [DateTime(2022, 4, 19)],
-          ),
-          const SizedBox(height: 39),
-          Text(
-            "Streaks",
-            style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                fontSize: 24,
-                color: Color(0xFF7856CE),
-                fontWeight: FontWeight.w600,
-              ),
-              shadows: <Shadow>[
-                const Shadow(
-                  offset: Offset(0, 8),
-                  blurRadius: 24,
-                  color: Color(0x337856CE),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Column(
-            children: [
-              ...usersHabits.map((habit) {
-                return Column(children: [
-                  HomeHabitCard(habit: habit),
-                  const SizedBox(
-                    height: 25,
-                  )
-                ]);
-              }),
-            ],
-          ),
-          const SizedBox(
-            height: 80,
-          )
-        ],
-      ));
+            const SizedBox(
+              height: 80,
+            )
+          ],
+        )),
+  );
 }

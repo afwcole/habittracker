@@ -2,23 +2,21 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
-import 'package:habittracker/models/habit.dart';
-import 'package:habittracker/models/habit_date.dart';
+import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/models/habit_date_model.dart';
+import 'package:habittracker/widgets/habit_card_button.dart';
 
-class HomeHabitCard extends StatefulWidget {
-  final Habit habit;
-  const HomeHabitCard({Key? key, required this.habit}) : super(key: key);
+class HabitCard extends StatefulWidget {
+  final HabitModel habit;
+  const HabitCard({Key? key, required this.habit}) : super(key: key);
 
   @override
-  State<HomeHabitCard> createState() => _HomeHabitCardState();
+  State<HabitCard> createState() => _HabitCardState();
 }
 
-class _HomeHabitCardState extends State<HomeHabitCard> {
+class _HabitCardState extends State<HabitCard> {
   @override
   Widget build(BuildContext context) {
-    final List<HabitDate> habitHistory = widget.habit.habitHistory;
-    final int noOfDaysInHistory = habitHistory.length;
-
     return Container(
       decoration: const BoxDecoration(
           color: Color(0xFFDDD0FC),
@@ -82,7 +80,37 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
               context,
               widget.habit.habitHistory,
             ),
-            habitCardButtonRow(context),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  HabitCardButton(
+                      habit: widget.habit, isCompletionButton: true),
+                  HabitCardButton(
+                      habit: widget.habit, isCompletionButton: false),
+                  Container(
+                    child: IconButton(
+                        icon: const Icon(
+                          Icons.equalizer,
+                        ),
+                        onPressed: () {},
+                        color: Colors.white,
+                        iconSize: 19),
+                    decoration: const BoxDecoration(
+                        color: Color(0xFF7856CE),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -90,102 +118,64 @@ class _HomeHabitCardState extends State<HomeHabitCard> {
   }
 }
 
-Widget habitCardButtonRow(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        habitCardButtons(context, true),
-        habitCardButtons(context, false),
-        Container(
-          child: IconButton(
-              icon: const Icon(
-                Icons.equalizer,
-              ),
-              onPressed: () {},
-              color: Colors.white,
-              iconSize: 19),
-          decoration: const BoxDecoration(
-              color: Color(0xFF7856CE),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x337856CE),
-                  blurRadius: 24,
-                  offset: Offset(0, 8),
-                ),
-              ]),
-        ),
-      ],
-    ),
-  );
-}
+Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
+  DateTime today = DateTime.now();
+  DateTime currentWeekStartDate = DateTime.utc(
+      today.year, today.month, today.day - (today.weekday - 1)); //Monday
 
-Widget weeklyStreak(BuildContext context, List<HabitDate> habitHistory) {
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ...habitHistory
-            .getRange(habitHistory.length - 8, habitHistory.length - 1)
+        ...getWeeksHabitDates(currentWeekStartDate, habitHistory)
+            .reversed
             .map((habitDate) => cardDateIcon(context, habitDate)),
-      ],
-    ),
-  );
-}
-
-Widget habitCardButtons(
-  BuildContext context,
-  bool isCompletedButton,
-) {
-  return Container(
-    padding: const EdgeInsets.all(8),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        isCompletedButton
-            ? const Icon(
-                Icons.done,
-                color: Colors.white,
-                size: 19,
-              )
-            : const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 19,
+        for (int j = 0; j <= 7 - today.weekday; j++)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                weekdayToISOString(
+                    DateTime.utc(today.year, today.month, today.day + j)
+                        .weekday,
+                    1),
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF7856CE),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-        Text(
-          isCompletedButton ? "Completed" : "Uncompleted",
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
+              const SizedBox(
+                height: 2,
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: 26,
+                width: 26,
+                child: Text(
+                  DateTime.utc(today.year, today.month, today.day + j)
+                      .day
+                      .toString(),
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF7856CE),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
       ],
     ),
-    decoration: BoxDecoration(
-        color: isCompletedButton
-            ? const Color(0xFFB3D264)
-            : const Color(0xFF7856CE),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(25),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x337856CE),
-            blurRadius: 24,
-            offset: Offset(0, 8),
-          ),
-        ]),
   );
 }
 
-Widget cardDateIcon(BuildContext context, HabitDate habitDate) {
+Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
   Color iconColor = getDateIconColor(habitDate);
 
   return Column(
