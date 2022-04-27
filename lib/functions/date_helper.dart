@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/models/habit_date_model.dart';
 
 List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
   List<DateTime> list = [];
-  int count = daysCount(toDateMonthYear(firstDate), toDateMonthYear(lastDate));
+  int count = daysCount(toDMY(firstDate), toDMY(lastDate));
   for (int i = 0; i < count; i++) {
-    list.add(toDateMonthYear(firstDate).add(Duration(days: i)));
+    list.add(toDMY(firstDate).add(Duration(days: i)));
   }
 
   return list;
 }
 
-DateTime toDateMonthYear(DateTime dateTime) {
+DateTime toDMY(DateTime dateTime) {
   return DateTime(dateTime.year, dateTime.month, dateTime.day);
 }
 
@@ -35,6 +34,10 @@ Color getDateIconColor(HabitDateModel habitDate) {
     case "Uncompleted":
       {
         return const Color(0xFFE85F4D);
+      }
+    case null:
+      {
+        return Colors.transparent;
       }
   }
 

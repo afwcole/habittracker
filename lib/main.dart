@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habittracker/models/user_data_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/pages/homepage.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +12,16 @@ void main() {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => UserDataModel(),
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserDataProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

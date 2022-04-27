@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
-import 'package:habittracker/models/habit_date_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:provider/provider.dart';
 
 class HabitCardButton extends StatefulWidget {
   final HabitModel habit;
-  bool isCompletionButton;
+  final bool isCompletionButton;
 
-  HabitCardButton(
+  const HabitCardButton(
       {Key? key, required this.habit, required this.isCompletionButton})
       : super(key: key);
 
@@ -20,8 +21,9 @@ class _HabitCardButtonState extends State<HabitCardButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.habit.habitHistory.add(HabitDateModel(DateTime.now(),
-            widget.isCompletionButton ? "Completed" : "Uncompleted"));
+        Provider.of<UserDataProvider>(context, listen: false)
+            .updateHabitHistory(widget.habit, DateTime.now(),
+                widget.isCompletionButton ? "Completed" : "Uncompleted");
       },
       child: Container(
         padding: const EdgeInsets.all(8),

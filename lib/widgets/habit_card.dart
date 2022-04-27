@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/models/habit_date_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/habit_card_button.dart';
+import 'package:provider/provider.dart';
 
 class HabitCard extends StatefulWidget {
   final HabitModel habit;
@@ -131,7 +133,7 @@ Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
         ...getWeeksHabitDates(currentWeekStartDate, habitHistory)
             .reversed
             .map((habitDate) => cardDateIcon(context, habitDate)),
-        for (int j = 0; j <= 7 - today.weekday; j++)
+        for (int j = 1; j <= 7 - today.weekday; j++)
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -203,7 +205,7 @@ Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               fontSize: 14,
-              color: habitDate.activity == "Break"
+              color: habitDate.activity == "Break" || habitDate.activity == null
                   ? const Color(0xFF7856CE)
                   : Colors.white,
               fontWeight: FontWeight.w600,

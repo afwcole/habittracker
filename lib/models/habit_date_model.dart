@@ -1,6 +1,6 @@
 class HabitDateModel {
   DateTime date;
-  String activity;
+  String? activity;
 
   HabitDateModel(
     this.date,

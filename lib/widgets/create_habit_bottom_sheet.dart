@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habittracker/models/user_data_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/frequency_option_widget.dart';
 import 'package:habittracker/widgets/simple_toggle.dart';
 import 'package:provider/provider.dart';
@@ -130,8 +130,7 @@ Future createHabitBottomSheet(BuildContext context) {
                     height: 10,
                   ),
                   const SimpleToggle(
-                    label:
-                        "Would you like notifications to be on for this habt?",
+                    label: "Switch on habit notifications",
                   ),
                   const SizedBox(
                     height: 25,
@@ -147,8 +146,9 @@ Future createHabitBottomSheet(BuildContext context) {
               padding: const EdgeInsets.all(20),
               child: GestureDetector(
                 onTap: () {
-                  Provider.of<UserDataModel>(context, listen: false)
+                  Provider.of<UserDataProvider>(context, listen: false)
                       .addHabitToList();
+                  Navigator.pop(context);
                 },
                 child: Container(
                   decoration: const BoxDecoration(

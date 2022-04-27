@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
-import 'package:habittracker/models/user_data_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
 import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
@@ -60,10 +60,8 @@ class HomePage extends StatelessWidget {
 }
 
 Widget mainBody(BuildContext context) {
-  List<HabitModel> usersHabits = HabitModel.fetchAll();
-
-  return Consumer<UserDataModel>(
-    builder: (context, userData, child) => SingleChildScrollView(
+  return Consumer<UserDataProvider>(
+    builder: (context, userDataProvider, child) => SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,7 +136,7 @@ Widget mainBody(BuildContext context) {
             ),
             Column(
               children: [
-                ...userData.habitList.map((habit) {
+                ...userDataProvider.habitList.map((habit) {
                   return Column(children: [
                     HabitCard(habit: habit),
                     const SizedBox(
