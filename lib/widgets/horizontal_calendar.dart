@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:habittracker/functions/date_helper.dart';
+import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/widgets/horizontal_date_widget.dart';
+import 'package:provider/provider.dart';
 
 class HorizontalCalendar extends StatefulWidget {
   final DateTime firstDate;
   final DateTime lastDate;
   final double height;
   final List<DateTime>? initialSelectedDates;
-  final double? spacingBetweenDates;
   final EdgeInsetsGeometry? padding;
   final int? minSelectedDateCount;
   final int? maxSelectedDateCount;
@@ -17,7 +18,6 @@ class HorizontalCalendar extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     this.height = 100,
-    this.spacingBetweenDates,
     this.padding,
     this.minSelectedDateCount,
     this.maxSelectedDateCount,
@@ -47,7 +47,12 @@ class _HorizontalCalendarState extends State<HorizontalCalendar> {
         for (int i = 0; i < allDates.length; i++)
           HorizontalDateWidget(
             date: allDates[i],
-            isSelected: selectedDates.contains(allDates[i]),
+            isSelected: Provider.of<AppDataProvider>(context, listen: false)
+                .isSelectedDate(allDates[i]),
+            isDisabled: Provider.of<AppDataProvider>(context, listen: false)
+                    .today
+                    .compareTo(allDates[i]) <
+                0,
             onTap: () {
               if (!selectedDates.contains(allDates[i])) {
                 if (widget.maxSelectedDateCount == 1 &&
@@ -57,7 +62,8 @@ class _HorizontalCalendarState extends State<HorizontalCalendar> {
                     selectedDates.length) {
                   return;
                 }
-                selectedDates.add(allDates[i]);
+                Provider.of<AppDataProvider>(context, listen: false)
+                    .setSelectedDate(allDates[i]);
               }
               setState(() {});
             },

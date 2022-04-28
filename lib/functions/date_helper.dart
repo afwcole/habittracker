@@ -12,7 +12,7 @@ List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
 }
 
 DateTime toDMY(DateTime dateTime) {
-  return DateTime(dateTime.year, dateTime.month, dateTime.day);
+  return DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
 }
 
 int daysCount(DateTime first, DateTime last) =>
@@ -22,6 +22,24 @@ String weekdayToISOString(int weekday, int noOfLetters) {
   List<String> weekdays3 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   List<String> weekdays1 = ["M", "T", "W", "T", "F", "S", "S"];
   return noOfLetters == 1 ? weekdays1[weekday - 1] : weekdays3[weekday - 1];
+}
+
+String monthToISOString(int month) {
+  List<String> months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  return months[month - 1];
 }
 
 Color getDateIconColor(HabitDateModel habitDate) {

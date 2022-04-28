@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
 import 'package:habittracker/widgets/habit_card.dart';
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
       extendBody: true,
       floatingActionButton: FloatingActionButton(
         elevation: 10,
-        backgroundColor: const Color(0xFF7856CE), //const Color(0xFFB3D264),
+        backgroundColor: const Color(0xFF7856CE),
         onPressed: () {
           createHabitBottomSheet(context);
         },
@@ -106,9 +106,10 @@ Widget mainBody(BuildContext context) {
               height: 10,
             ),
             HorizontalCalendar(
-              firstDate: DateTime(2022, 4, 13),
-              lastDate: DateTime(2022, 4, 19),
-              spacingBetweenDates: 8,
+              firstDate: Provider.of<AppDataProvider>(context, listen: false)
+                  .thisWeekStartDate,
+              lastDate: Provider.of<AppDataProvider>(context, listen: false)
+                  .thisWeekEndDate,
               minSelectedDateCount: 1,
               maxSelectedDateCount: 1,
               initialSelectedDates: [DateTime(2022, 4, 19)],

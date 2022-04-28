@@ -4,10 +4,7 @@ import 'package:habittracker/functions/date_helper.dart';
 
 class HorizontalDateWidget extends StatelessWidget {
   final DateTime date;
-  final String? monthFormat;
-  final String? dateFormat;
   final VoidCallback? onTap;
-  final VoidCallback? onLongTap;
   final bool isSelected;
   final bool isDisabled;
 
@@ -15,21 +12,21 @@ class HorizontalDateWidget extends StatelessWidget {
     Key? key,
     required this.date,
     this.onTap,
-    this.onLongTap,
     this.isSelected = false,
     this.isDisabled = false,
-    this.monthFormat,
-    this.dateFormat,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: isDisabled ? null : onTap,
-      onLongPress: isDisabled ? null : onLongTap,
       child: Container(
         width: 40,
-        decoration: isSelected ? _selectedDecoration() : _defaultDecoration(),
+        decoration: isDisabled
+            ? null
+            : isSelected
+                ? _selectedDecoration()
+                : _defaultDecoration(),
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 13),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -57,6 +54,9 @@ class HorizontalDateWidget extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 5,
             ),
           ],
         ),

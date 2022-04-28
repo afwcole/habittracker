@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/models/habit_date_model.dart';
-import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/widgets/habit_card_button.dart';
 import 'package:provider/provider.dart';
 
@@ -122,8 +122,9 @@ class _HabitCardState extends State<HabitCard> {
 
 Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
   DateTime today = DateTime.now();
-  DateTime currentWeekStartDate = DateTime.utc(
-      today.year, today.month, today.day - (today.weekday - 1)); //Monday
+  DateTime currentWeekStartDate =
+      Provider.of<AppDataProvider>(context, listen: false)
+          .thisWeekStartDate; //Monday
 
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -137,6 +138,11 @@ Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const Icon(
+                null,
+                color: Color(0xFF7856CE),
+                size: 7,
+              ),
               Text(
                 weekdayToISOString(
                     DateTime.utc(today.year, today.month, today.day + j)
@@ -180,49 +186,60 @@ Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
 Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
   Color iconColor = getDateIconColor(habitDate);
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text(
-        weekdayToISOString(habitDate.date.weekday, 1),
-        style: GoogleFonts.poppins(
-          textStyle: const TextStyle(
-            fontSize: 14,
-            color: Color(0xFF7856CE),
-            fontWeight: FontWeight.w600,
-          ),
+  return Consumer<AppDataProvider>(
+    builder: (context, userDataProvider, child) => Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          userDataProvider.isSelectedDate(habitDate.date) ? Icons.circle : null,
+          color: const Color(0xFF7856CE),
+          size: 7,
         ),
-      ),
-      const SizedBox(
-        height: 2,
-      ),
-      Container(
-        alignment: Alignment.center,
-        height: 26,
-        width: 26,
-        child: Text(
-          habitDate.date.day.toString(),
+        const SizedBox(
+          height: 2,
+        ),
+        Text(
+          weekdayToISOString(habitDate.date.weekday, 1),
           style: GoogleFonts.poppins(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontSize: 14,
-              color: habitDate.activity == "Break" || habitDate.activity == null
-                  ? const Color(0xFF7856CE)
-                  : Colors.white,
+              color: Color(0xFF7856CE),
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        decoration: BoxDecoration(
-          border: habitDate.activity == "Break"
-              ? Border.all(
-                  color: const Color(0xFF7856CE),
-                  width: 2,
-                )
-              : null,
-          color: iconColor,
-          shape: BoxShape.circle,
+        const SizedBox(
+          height: 2,
         ),
-      ),
-    ],
+        Container(
+          alignment: Alignment.center,
+          height: 26,
+          width: 26,
+          child: Text(
+            habitDate.date.day.toString(),
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                fontSize: 14,
+                color:
+                    habitDate.activity == "Break" || habitDate.activity == null
+                        ? const Color(0xFF7856CE)
+                        : Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          decoration: BoxDecoration(
+            border: habitDate.activity == "Break"
+                ? Border.all(
+                    color: const Color(0xFF7856CE),
+                    width: 2,
+                  )
+                : null,
+            color: iconColor,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ],
+    ),
   );
 }
