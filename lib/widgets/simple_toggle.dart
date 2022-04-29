@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SimpleToggle extends StatefulWidget {
+class SimpleToggle extends StatelessWidget {
+  final bool isSwitched;
   final String label;
-  const SimpleToggle({Key? key, required this.label}) : super(key: key);
+  final Function(bool)? onChanged;
 
-  @override
-  State<SimpleToggle> createState() => _SimpleToggleState();
-}
-
-class _SimpleToggleState extends State<SimpleToggle> {
-  bool isSwitched = false;
+  const SimpleToggle(
+      {Key? key, required this.label, required this.isSwitched, this.onChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class _SimpleToggleState extends State<SimpleToggle> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          widget.label,
+          label,
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
@@ -36,11 +34,7 @@ class _SimpleToggleState extends State<SimpleToggle> {
         ),
         Switch(
           value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              isSwitched = value;
-            });
-          },
+          onChanged: onChanged,
           activeTrackColor: const Color(0xFFDDD0FC),
           activeColor: const Color(0xFF7856CE),
         ),

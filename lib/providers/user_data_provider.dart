@@ -25,7 +25,6 @@ class UserDataProvider extends ChangeNotifier {
 
   void updateHabitHistory(HabitModel habit, DateTime date, String updateValue) {
     if (habit.selectedFrequencyDays.contains(date.weekday)) {
-      print(date.weekday);
       _habitList
           .firstWhere((element) => element == habit)
           .getDateInHistory(date)
@@ -34,22 +33,23 @@ class UserDataProvider extends ChangeNotifier {
     }
   }
 
-  void addHabitToList() {
-    HabitModel habitModel = HabitModel(
-        4,
-        "Record Youtube Video",
-        "Weekly",
-        DateTime.now(),
-        [0, 2, 4, 6],
-        [
-          HabitDateModel(DateTime.utc(2022, 4, 25), "Uncompleted"),
-          HabitDateModel(DateTime.utc(2022, 4, 26), "Completed"),
-          HabitDateModel(DateTime.utc(2022, 4, 27), "Break"),
-          HabitDateModel(toDMY(DateTime.now()), null),
-        ],
-        true);
-
-    _habitList.add(habitModel);
+  void addHabitToList(String habitName, String selectedOptions,
+      List<int> selectedDays, bool notificationSwitch) {
+    _habitList.add(
+      HabitModel(
+          _habitList.length,
+          habitName,
+          selectedOptions,
+          DateTime.now(),
+          selectedDays,
+          [
+            HabitDateModel(DateTime.utc(2022, 4, 25), "Uncompleted"),
+            HabitDateModel(DateTime.utc(2022, 4, 26), "Completed"),
+            HabitDateModel(DateTime.utc(2022, 4, 27), "Break"),
+            HabitDateModel(toDMY(DateTime.now()), null),
+          ],
+          notificationSwitch),
+    );
 
     notifyListeners();
   }

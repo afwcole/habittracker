@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FrequencyOptionsSection extends StatefulWidget {
-  const FrequencyOptionsSection({Key? key}) : super(key: key);
+  final List<String> selectedOptions;
+  final List<int> selectedDays;
+
+  const FrequencyOptionsSection(
+      {Key? key, required this.selectedOptions, required this.selectedDays})
+      : super(key: key);
 
   @override
   State<FrequencyOptionsSection> createState() =>
@@ -11,9 +16,7 @@ class FrequencyOptionsSection extends StatefulWidget {
 
 class _FrequencyOptionsSectionState extends State<FrequencyOptionsSection> {
   final List<String> allOptions = ["Daily", "Weekly", "Monthly"];
-  final List<String> selectedOptions = [];
   final List<String> allDays = ["M", "T", "W", "T", "F", "S", "S"];
-  final List<int> selectedDays = [];
   final int maxSelectedOptions = 1;
   final int _maxSelectedOptions = 7;
 
@@ -28,20 +31,21 @@ class _FrequencyOptionsSectionState extends State<FrequencyOptionsSection> {
               _frequencyOption(
                 context,
                 allOptions[i],
-                selectedOptions.contains(allOptions[i]),
+                widget.selectedOptions.contains(allOptions[i]),
                 false,
                 allOptions[i].length == 1,
                 false,
                 () {
-                  if (!selectedOptions.contains(allOptions[i])) {
+                  if (!widget.selectedOptions.contains(allOptions[i])) {
                     if (maxSelectedOptions == 1 &&
-                        selectedOptions.length == 1) {
-                      selectedOptions.clear();
-                    } else if (maxSelectedOptions == selectedOptions.length) {
+                        widget.selectedOptions.length == 1) {
+                      widget.selectedOptions.clear();
+                    } else if (maxSelectedOptions ==
+                        widget.selectedOptions.length) {
                       return;
                     }
 
-                    selectedOptions.add(allOptions[i]);
+                    widget.selectedOptions.add(allOptions[i]);
                   }
                   setState(() {});
                 },
@@ -69,20 +73,22 @@ class _FrequencyOptionsSectionState extends State<FrequencyOptionsSection> {
               _frequencyOption(
                 context,
                 allDays[j],
-                selectedDays.contains(j),
+                widget.selectedDays.contains(j),
                 false,
                 true,
                 false,
                 () {
-                  if (!selectedDays.contains(j)) {
-                    if (_maxSelectedOptions == 1 && selectedDays.length == 1) {
-                      selectedDays.clear();
-                    } else if (_maxSelectedOptions == selectedDays.length) {
+                  if (!widget.selectedDays.contains(j)) {
+                    if (_maxSelectedOptions == 1 &&
+                        widget.selectedDays.length == 1) {
+                      widget.selectedDays.clear();
+                    } else if (_maxSelectedOptions ==
+                        widget.selectedDays.length) {
                       return;
                     }
-                    selectedDays.add(j);
+                    widget.selectedDays.add(j);
                   } else {
-                    selectedDays.remove(j);
+                    widget.selectedDays.remove(j);
                   }
                   setState(() {});
                 },
@@ -92,14 +98,13 @@ class _FrequencyOptionsSectionState extends State<FrequencyOptionsSection> {
         const SizedBox(
           height: 18,
         ),
-        _frequencyOption(
-            context, "Everyday", selectedDays.length >= 7, false, false, true,
-            () {
-          if (selectedDays.length == 7) {
-            selectedDays.clear();
+        _frequencyOption(context, "Everyday", widget.selectedDays.length >= 7,
+            false, false, true, () {
+          if (widget.selectedDays.length == 7) {
+            widget.selectedDays.clear();
           } else {
-            selectedDays.clear();
-            selectedDays.addAll([0, 1, 2, 3, 4, 5, 6]);
+            widget.selectedDays.clear();
+            widget.selectedDays.addAll([0, 1, 2, 3, 4, 5, 6]);
           }
           setState(() {});
         })

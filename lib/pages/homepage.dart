@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
-import 'package:habittracker/widgets/create_habit_bottom_sheet.dart';
 import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
+import 'package:habittracker/widgets/build_habit_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,7 +21,16 @@ class HomePage extends StatelessWidget {
         elevation: 10,
         backgroundColor: const Color(0xFF7856CE),
         onPressed: () {
-          createHabitBottomSheet(context);
+          showModalBottomSheet(
+            isScrollControlled: true,
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.8),
+            context: context,
+            backgroundColor: const Color(0xFFF9F7FF),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+            builder: (context) => const BuildHabitBottomSheet(),
+          );
         },
         child: const Icon(
           Icons.add,
@@ -86,7 +96,7 @@ Widget mainBody(BuildContext context) {
             ),
             const SizedBox(height: 36),
             Text(
-              "January",
+              monthToISOString(DateTime.now().month),
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 16,
