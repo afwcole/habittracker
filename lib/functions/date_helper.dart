@@ -75,3 +75,38 @@ List<HabitDateModel> getWeeksHabitDates(
 
   return thisWeekHabitHistory;
 }
+
+List<DateTime> getDatesSinceMonday(DateTime date) {
+  List<DateTime> allDatesFromMonday = [];
+  DateTime today = toDMY(DateTime.now());
+  DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
+  int daysBetween = date.difference(weekStartDate).inDays;
+
+  for (int i = 0; i < daysBetween; i++) {
+    allDatesFromMonday.add(weekStartDate.add(Duration(days: i)));
+  }
+  print(today.toString());
+  print(weekStartDate.toString());
+  print(daysBetween.toString());
+  print(allDatesFromMonday);
+
+  return allDatesFromMonday;
+}
+
+List<DateTime> getDatesToSunday(DateTime date) {
+  List<DateTime> allDatesToSunday = [];
+  DateTime today = toDMY(DateTime.now());
+  DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
+  DateTime weekEndDate = weekStartDate.add(const Duration(days: 6));
+  int daysBetween = weekEndDate.difference(date).inDays;
+
+  for (int i = daysBetween; i >= 0; i--) {
+    allDatesToSunday.add(weekEndDate.subtract(Duration(days: i)));
+  }
+  print(today.toString());
+  print(weekStartDate.toString());
+  print(weekEndDate.toString());
+  print(daysBetween.toString());
+  print(allDatesToSunday);
+  return allDatesToSunday;
+}
