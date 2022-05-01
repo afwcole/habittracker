@@ -7,6 +7,16 @@ class AppDataProvider extends ChangeNotifier {
 
   DateTime get selectedDate => _selectedDate;
 
+  List<DateTime> getWeekDateList() {
+    List<DateTime> weekDatesList = [];
+
+    for (int i = 0; i < 7; i++) {
+      weekDatesList.add(thisWeekStartDate.add(Duration(days: i)));
+    }
+
+    return weekDatesList;
+  }
+
   void setSelectedDate(DateTime date) {
     _selectedDate = date;
     notifyListeners();

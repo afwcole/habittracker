@@ -112,6 +112,12 @@ class _BuildHabitBottomSheetState extends State<BuildHabitBottomSheet> {
                               width: 2,
                               color: Colors.red,
                             )),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Colors.red,
+                            )),
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -167,7 +173,7 @@ class _BuildHabitBottomSheetState extends State<BuildHabitBottomSheet> {
                       },
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 100,
                     ),
                   ],
                 ),

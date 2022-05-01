@@ -29,13 +29,11 @@ class HorizontalCalendar extends StatefulWidget {
 }
 
 class _HorizontalCalendarState extends State<HorizontalCalendar> {
-  final List<DateTime> allDates = [];
   final List<DateTime> selectedDates = [];
 
   @override
   void initState() {
     super.initState();
-    allDates.addAll(getDateList(widget.firstDate, widget.lastDate));
     selectedDates.addAll(widget.initialSelectedDates!.map((toDMY)));
   }
 
@@ -44,17 +42,17 @@ class _HorizontalCalendarState extends State<HorizontalCalendar> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        for (int i = 0; i < allDates.length; i++)
-          HorizontalDateWidget(
-            date: allDates[i],
+        ...getWeekDateList().map(
+          (date) => HorizontalDateWidget(
+            date: date,
             isSelected: Provider.of<AppDataProvider>(context, listen: false)
-                .isSelectedDate(allDates[i]),
+                .isSelectedDate(date),
             isDisabled: Provider.of<AppDataProvider>(context, listen: false)
                     .today
-                    .compareTo(allDates[i]) <
+                    .compareTo(date) <
                 0,
             onTap: () {
-              if (!selectedDates.contains(allDates[i])) {
+              if (!selectedDates.contains(date)) {
                 if (widget.maxSelectedDateCount == 1 &&
                     selectedDates.length == 1) {
                   selectedDates.clear();
@@ -63,11 +61,12 @@ class _HorizontalCalendarState extends State<HorizontalCalendar> {
                   return;
                 }
                 Provider.of<AppDataProvider>(context, listen: false)
-                    .setSelectedDate(allDates[i]);
+                    .setSelectedDate(date);
               }
               setState(() {});
             },
           ),
+        ),
       ],
     );
   }

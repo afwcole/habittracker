@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:habittracker/functions/date_helper.dart';
-import 'package:habittracker/models/habit_date_model.dart';
 import 'package:habittracker/models/habit_model.dart';
 
 class UserDataProvider extends ChangeNotifier {
@@ -11,12 +10,13 @@ class UserDataProvider extends ChangeNotifier {
       "Daily",
       DateTime.utc(2022, 4, 24),
       [1, 2, 3, 4, 6],
-      [
-        HabitDateModel(DateTime.utc(2022, 4, 25), "Uncompleted"),
-        HabitDateModel(DateTime.utc(2022, 4, 26), "Completed"),
-        HabitDateModel(DateTime.utc(2022, 4, 27), "Completed"),
-        HabitDateModel(toDMY(DateTime.now()), null),
-      ],
+      {
+        DateTime.utc(2022, 4, 25): "Uncompleted",
+        DateTime.utc(2022, 4, 26): "Completed",
+        DateTime.utc(2022, 4, 27): "Completed",
+        DateTime.utc(2022, 4, 28): "Completed",
+        toDMY(DateTime.now()): null,
+      },
       true,
     ),
   ];
@@ -24,13 +24,9 @@ class UserDataProvider extends ChangeNotifier {
   List<HabitModel> get habitList => _habitList;
 
   void updateHabitHistory(HabitModel habit, DateTime date, String updateValue) {
-    if (habit.selectedFrequencyDays.contains(date.weekday)) {
-      _habitList
-          .firstWhere((element) => element == habit)
-          .getDateInHistory(date)
-          .activity = updateValue;
-      notifyListeners();
-    }
+    _habitList.firstWhere((element) => element == habit).habitHistory[date] =
+        updateValue;
+    notifyListeners();
   }
 
   void addHabitToList(String habitName, String selectedOptions,
@@ -42,12 +38,11 @@ class UserDataProvider extends ChangeNotifier {
           selectedOptions,
           DateTime.now(),
           selectedDays,
-          [
-            HabitDateModel(DateTime.utc(2022, 4, 25), "Uncompleted"),
-            HabitDateModel(DateTime.utc(2022, 4, 26), "Completed"),
-            HabitDateModel(DateTime.utc(2022, 4, 27), "Break"),
-            HabitDateModel(toDMY(DateTime.now()), null),
-          ],
+          {
+            DateTime.utc(2022, 4, 25): "Uncompleted",
+            DateTime.utc(2022, 4, 26): "Completed",
+            DateTime.utc(2022, 4, 27): "Break",
+          },
           notificationSwitch),
     );
 

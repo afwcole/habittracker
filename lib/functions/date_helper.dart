@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:habittracker/models/habit_date_model.dart';
 
+List<DateTime> getWeekDateList() {
+  DateTime today = toDMY(DateTime.now());
+  DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
+  List<DateTime> weekList = [];
+  for (int i = 0; i < 7; i++) {
+    weekList.add(weekStartDate.add(Duration(days: i)));
+  }
+
+  return weekList;
+}
+
 List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
   List<DateTime> list = [];
-  int count = daysCount(toDMY(firstDate), toDMY(lastDate));
+  int count = toDMY(lastDate).difference(toDMY(firstDate)).inDays + 1;
+
   for (int i = 0; i < count; i++) {
     list.add(toDMY(firstDate).add(Duration(days: i)));
   }
@@ -14,9 +26,6 @@ List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
 DateTime toDMY(DateTime dateTime) {
   return DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
 }
-
-int daysCount(DateTime first, DateTime last) =>
-    last.difference(first).inDays + 1;
 
 String weekdayToISOString(int weekday, int noOfLetters) {
   List<String> weekdays3 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -42,8 +51,8 @@ String monthToISOString(int month) {
   return months[month - 1];
 }
 
-Color getDateIconColor(HabitDateModel habitDate) {
-  switch (habitDate.activity) {
+Color getDateIconColor(String? activity) {
+  switch (activity) {
     case "Completed":
       {
         return const Color(0xFFB3D264);
@@ -60,53 +69,4 @@ Color getDateIconColor(HabitDateModel habitDate) {
   }
 
   return Colors.white;
-}
-
-List<HabitDateModel> getWeeksHabitDates(
-    DateTime currentWeekStartDate, List<HabitDateModel> habitHistory) {
-  List<HabitDateModel> thisWeekHabitHistory = [];
-
-  for (var habitDate in habitHistory.reversed) {
-    if (habitDate.date.compareTo(currentWeekStartDate) < 0) {
-      return thisWeekHabitHistory;
-    }
-    thisWeekHabitHistory.add(habitDate);
-  }
-
-  return thisWeekHabitHistory;
-}
-
-List<DateTime> getDatesSinceMonday(DateTime date) {
-  List<DateTime> allDatesFromMonday = [];
-  DateTime today = toDMY(DateTime.now());
-  DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
-  int daysBetween = date.difference(weekStartDate).inDays;
-
-  for (int i = 0; i < daysBetween; i++) {
-    allDatesFromMonday.add(weekStartDate.add(Duration(days: i)));
-  }
-  print(today.toString());
-  print(weekStartDate.toString());
-  print(daysBetween.toString());
-  print(allDatesFromMonday);
-
-  return allDatesFromMonday;
-}
-
-List<DateTime> getDatesToSunday(DateTime date) {
-  List<DateTime> allDatesToSunday = [];
-  DateTime today = toDMY(DateTime.now());
-  DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
-  DateTime weekEndDate = weekStartDate.add(const Duration(days: 6));
-  int daysBetween = weekEndDate.difference(date).inDays;
-
-  for (int i = daysBetween; i >= 0; i--) {
-    allDatesToSunday.add(weekEndDate.subtract(Duration(days: i)));
-  }
-  print(today.toString());
-  print(weekStartDate.toString());
-  print(weekEndDate.toString());
-  print(daysBetween.toString());
-  print(allDatesToSunday);
-  return allDatesToSunday;
 }

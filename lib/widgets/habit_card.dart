@@ -120,7 +120,7 @@ class _HabitCardState extends State<HabitCard> {
   }
 }
 
-Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
+Widget weeklyStreak(BuildContext context, Map<DateTime, String?> habitHistory) {
   DateTime today = DateTime.now();
   DateTime currentWeekStartDate =
       Provider.of<AppDataProvider>(context, listen: false)
@@ -131,67 +131,22 @@ Widget weeklyStreak(BuildContext context, List<HabitDateModel> habitHistory) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ...getWeeksHabitDates(currentWeekStartDate, habitHistory)
-            .reversed
-            .map((habitDate) => cardDateIcon(context, habitDate)),
-        for (int j = 1; j <= 7 - today.weekday; j++)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                null,
-                color: Color(0xFF7856CE),
-                size: 7,
-              ),
-              Text(
-                weekdayToISOString(
-                    DateTime.utc(today.year, today.month, today.day + j)
-                        .weekday,
-                    1),
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF7856CE),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 26,
-                width: 26,
-                child: Text(
-                  DateTime.utc(today.year, today.month, today.day + j)
-                      .day
-                      .toString(),
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        ...getWeekDateList()
+            .map((date) => cardDateIcon(context, date, habitHistory[date])),
       ],
     ),
   );
 }
 
-Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
-  Color iconColor = getDateIconColor(habitDate);
+Widget cardDateIcon(BuildContext context, DateTime date, String? activity) {
+  Color iconColor = getDateIconColor(activity);
 
   return Consumer<AppDataProvider>(
     builder: (context, userDataProvider, child) => Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
-          userDataProvider.isSelectedDate(habitDate.date) ? Icons.circle : null,
+          userDataProvider.isSelectedDate(date) ? Icons.circle : null,
           color: const Color(0xFF7856CE),
           size: 7,
         ),
@@ -199,7 +154,7 @@ Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
           height: 2,
         ),
         Text(
-          weekdayToISOString(habitDate.date.weekday, 1),
+          weekdayToISOString(date.weekday, 1),
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
@@ -216,20 +171,19 @@ Widget cardDateIcon(BuildContext context, HabitDateModel habitDate) {
           height: 26,
           width: 26,
           child: Text(
-            habitDate.date.day.toString(),
+            date.day.toString(),
             style: GoogleFonts.poppins(
               textStyle: TextStyle(
                 fontSize: 14,
-                color:
-                    habitDate.activity == "Break" || habitDate.activity == null
-                        ? const Color(0xFF7856CE)
-                        : Colors.white,
+                color: activity == "Break" || activity == null
+                    ? const Color(0xFF7856CE)
+                    : Colors.white,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
           decoration: BoxDecoration(
-            border: habitDate.activity == "Break"
+            border: activity == "Break"
                 ? Border.all(
                     color: const Color(0xFF7856CE),
                     width: 2,
