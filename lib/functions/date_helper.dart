@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:habittracker/models/habit_date_model.dart';
 
 List<DateTime> getWeekDateList() {
   DateTime today = toDMY(DateTime.now());
@@ -10,17 +9,6 @@ List<DateTime> getWeekDateList() {
   }
 
   return weekList;
-}
-
-List<DateTime> getDateList(DateTime firstDate, DateTime lastDate) {
-  List<DateTime> list = [];
-  int count = toDMY(lastDate).difference(toDMY(firstDate)).inDays + 1;
-
-  for (int i = 0; i < count; i++) {
-    list.add(toDMY(firstDate).add(Duration(days: i)));
-  }
-
-  return list;
 }
 
 DateTime toDMY(DateTime dateTime) {

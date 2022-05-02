@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
-import 'package:habittracker/providers/app_data_provider.dart';
+import 'package:habittracker/pages/analytics_page.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: mainBody(context),
+      body: analyticsBody(context),
       extendBody: true,
       floatingActionButton: FloatingActionButton(
         elevation: 10,
@@ -115,15 +115,7 @@ Widget mainBody(BuildContext context) {
             const SizedBox(
               height: 10,
             ),
-            HorizontalCalendar(
-              firstDate: Provider.of<AppDataProvider>(context, listen: false)
-                  .thisWeekStartDate,
-              lastDate: Provider.of<AppDataProvider>(context, listen: false)
-                  .thisWeekEndDate,
-              minSelectedDateCount: 1,
-              maxSelectedDateCount: 1,
-              initialSelectedDates: [DateTime(2022, 4, 19)],
-            ),
+            const HorizontalCalendar(),
             const SizedBox(height: 39),
             Text(
               "Streaks",

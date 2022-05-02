@@ -22,7 +22,9 @@ class AppDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isSelectedDate(DateTime date) => selectedDate.compareTo(date) == 0;
+  bool isSelectedDate(DateTime date) {
+    return selectedDate.compareTo(date) == 0;
+  }
 
   DateTime get today => _today;
 

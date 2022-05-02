@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
-import 'package:habittracker/models/habit_date_model.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/widgets/habit_card_button.dart';
 import 'package:provider/provider.dart';
@@ -121,11 +120,6 @@ class _HabitCardState extends State<HabitCard> {
 }
 
 Widget weeklyStreak(BuildContext context, Map<DateTime, String?> habitHistory) {
-  DateTime today = DateTime.now();
-  DateTime currentWeekStartDate =
-      Provider.of<AppDataProvider>(context, listen: false)
-          .thisWeekStartDate; //Monday
-
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: Row(
