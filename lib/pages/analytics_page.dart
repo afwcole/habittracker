@@ -86,39 +86,126 @@ Widget analyticsBody(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 228,
-                width: 192,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(25),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x337856CE),
-                        blurRadius: 24,
-                        offset: Offset(0, 8),
-                      ),
-                    ]),
+              Column(
+                children: [
+                  Container(
+                    height: 228,
+                    width: 192,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 70,
+                    width: 192,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
+                  ),
+                ],
               ),
-              Container(
-                height: 149,
-                width: 123,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(25),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x337856CE),
-                        blurRadius: 24,
-                        offset: Offset(0, 8),
-                      ),
-                    ]),
+              Column(
+                children: [
+                  Container(
+                    height: 149,
+                    width: 123,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 149,
+                    width: 123,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
+                  ),
+                ],
               ),
             ]),
+        const SizedBox(height: 50),
+        Text(
+          "Habit History",
+          style: GoogleFonts.poppins(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF7856CE),
+              fontWeight: FontWeight.w600,
+            ),
+            shadows: <Shadow>[
+              const Shadow(
+                offset: Offset(0, 8),
+                blurRadius: 24,
+                color: Color(0x337856CE),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        Container(
+          height: 300,
+          width: 400,
+          padding: const EdgeInsets.all(20),
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(25),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x337856CE),
+                  blurRadius: 24,
+                  offset: Offset(0, 8),
+                ),
+              ]),
+        ),
+        const SizedBox(
+          height: 110,
+        )
       ],
     ),
   );
