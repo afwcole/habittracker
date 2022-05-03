@@ -89,6 +89,7 @@ Widget analyticsBody(BuildContext context) {
               Column(
                 children: [
                   Container(
+                    padding: const EdgeInsets.all(15),
                     height: 228,
                     width: 192,
                     decoration: const BoxDecoration(
@@ -103,6 +104,65 @@ Widget analyticsBody(BuildContext context) {
                             offset: Offset(0, 8),
                           ),
                         ]),
+                    child: Column(children: [
+                      Text(
+                        "Avg. Completion \nRate",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF7856CE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "80%",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            color: Color(0xFF7856CE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Days",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFFA5A5A5),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                   const SizedBox(
                     height: 20,
@@ -130,6 +190,7 @@ Widget analyticsBody(BuildContext context) {
                   Container(
                     height: 149,
                     width: 123,
+                    padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(
@@ -142,6 +203,76 @@ Widget analyticsBody(BuildContext context) {
                             offset: Offset(0, 8),
                           ),
                         ]),
+                    child: Column(children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.link,
+                            color: Color(0xFF7856CE),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "Current \nStreak",
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF7856CE),
+                                fontWeight: FontWeight.w600,
+                              ),
+                              shadows: <Shadow>[
+                                const Shadow(
+                                  offset: Offset(0, 8),
+                                  blurRadius: 24,
+                                  color: Color(0x337856CE),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "42",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            color: Color(0xFF7856CE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Days",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFFA5A5A5),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                   const SizedBox(
                     height: 20,
@@ -149,6 +280,7 @@ Widget analyticsBody(BuildContext context) {
                   Container(
                     height: 149,
                     width: 123,
+                    padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(
@@ -161,6 +293,65 @@ Widget analyticsBody(BuildContext context) {
                             offset: Offset(0, 8),
                           ),
                         ]),
+                    child: Column(children: [
+                      Text(
+                        "Best \nStreak",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF7856CE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "112",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            color: Color(0xFF7856CE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Days",
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFFA5A5A5),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          shadows: <Shadow>[
+                            const Shadow(
+                              offset: Offset(0, 8),
+                              blurRadius: 24,
+                              color: Color(0x337856CE),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                 ],
               ),
