@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/widgets/range_picker_widget.dart';
 import 'package:habittracker/widgets/streaks_card.dart';
 import 'package:habittracker/widgets/percent_card.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AnalyticsPage extends StatefulWidget {
-  const AnalyticsPage({Key? key}) : super(key: key);
+  final HabitModel habit;
+  const AnalyticsPage({Key? key, required this.habit}) : super(key: key);
 
   @override
   State<AnalyticsPage> createState() => _AnalyticsPageState();
 }
 
 class _AnalyticsPageState extends State<AnalyticsPage> {
-  List<String> rangeOptions = ["Past 7 Days", "Past 30 Days", "Past Year"];
-  String selectedRange = "";
+  final List<String> _rangeOptions = [
+    "Past 7 Days",
+    "Past 30 Days",
+    "Past Year"
+  ];
+  String _selectedRange = "Past 7 Days";
+  int _selectedRangeInt = 7;
+  int calculatedDays = 0;
+  int completedDays = 0;
+
+  double getCompletedRate() {
+    if (_selectedRange == "Past 7 Days") {
+      _selectedRangeInt = 7;
+    } else if (_selectedRange == "Past 30 Days") {
+      _selectedRangeInt = 30;
+    } else {
+      _selectedRangeInt = 365;
+    }
+
+    calculatedDays =
+        widget.habit.getStatsInRange(_selectedRangeInt)["range_calculated"]!;
+    completedDays =
+        widget.habit.getStatsInRange(_selectedRangeInt)["completed"]!;
+
+    return completedDays / calculatedDays;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +52,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
         children: [
           const SizedBox(height: 36),
           Text(
-            "Morning Workout",
+            widget.habit.habitName,
             style: GoogleFonts.poppins(
               textStyle: const TextStyle(
                 fontSize: 24,
@@ -48,12 +74,12 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ...rangeOptions.map((option) => RangePickerWidget(
+              ..._rangeOptions.map((option) => RangePickerWidget(
                     statOption: option,
-                    isSelected: selectedRange == option,
+                    isSelected: _selectedRange == option,
                     onTap: () {
                       setState(() {
-                        selectedRange = option;
+                        _selectedRange = option;
                       });
                     },
                   )),
@@ -89,17 +115,22 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 crossAxisCellCount: 5,
                 mainAxisCellCount: 8,
                 child: percentCard(
-                    "Avg Completion \nRate", Icons.check_circle_rounded, 0.8),
+                    "Avg Completion \nRate",
+                    Icons.check_circle_rounded,
+                    getCompletedRate(),
+                    "$completedDays/$calculatedDays Days"),
               ),
               StaggeredGridTile.count(
                 crossAxisCellCount: 4,
                 mainAxisCellCount: 4,
-                child: streaksCard("Current \nStreak", 42, "Days", Icons.link),
+                child: streaksCard("Current \nStreak",
+                    widget.habit.getCurrentStreak(), "Days", Icons.link),
               ),
               StaggeredGridTile.count(
                 crossAxisCellCount: 4,
                 mainAxisCellCount: 4,
-                child: streaksCard("Best \nStreak", 112, "Days", Icons.link),
+                child: streaksCard("Best \nStreak",
+                    widget.habit.getBestStreak(), "Days", Icons.link),
               ),
             ],
           ),
@@ -144,7 +175,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               view: CalendarView.month,
               firstDayOfWeek: 1,
               cellBorderColor: Colors.transparent,
-              todayHighlightColor: Color(0xFF7856CE),
+              todayHighlightColor: const Color(0xFF7856CE),
             ),
           ),
           const SizedBox(

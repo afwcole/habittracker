@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-Widget percentCard(String statTitle, IconData icon, double percentValue) {
+Widget percentCard(
+    String statTitle, IconData icon, double percentValue, String rateLabel) {
+  Color indicatorColor;
+  if (percentValue < 0.5) {
+    indicatorColor = const Color(0xFFE85F4D);
+  } else if (percentValue < 0.7) {
+    indicatorColor = const Color(0xFF7856CE);
+  } else {
+    indicatorColor = const Color(0xFFB3D264);
+  }
+
   return Container(
     width: 123,
     height: 149,
@@ -54,8 +64,7 @@ Widget percentCard(String statTitle, IconData icon, double percentValue) {
         radius: 130.0,
         lineWidth: 9.0,
         percent: percentValue,
-        progressColor: const Color(
-            0xFFB3D264), //const Color(0xFF7856CE), const Color(0xFFE85F4D),
+        progressColor: indicatorColor,
         backgroundColor: Colors.transparent,
         curve: Curves.decelerate,
         circularStrokeCap: CircularStrokeCap.round,
@@ -86,7 +95,7 @@ Widget percentCard(String statTitle, IconData icon, double percentValue) {
                 height: 5,
               ),
               Text(
-                "204/350 Days",
+                rateLabel,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 12,
