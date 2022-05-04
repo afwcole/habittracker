@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/widgets/streaks_card.dart';
+import 'package:habittracker/widgets/percent_card.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 Widget analyticsBody(BuildContext context) {
   List<String> statOptions = ["Past 7 Days", "Past 30 Days", "Past Year"];
@@ -82,280 +86,29 @@ Widget analyticsBody(BuildContext context) {
           ),
         ),
         const SizedBox(height: 15),
-        Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    height: 228,
-                    width: 192,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x337856CE),
-                            blurRadius: 24,
-                            offset: Offset(0, 8),
-                          ),
-                        ]),
-                    child: Column(children: [
-                      Text(
-                        "Avg. Completion \nRate",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w600,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "80%",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w600,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Days",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFFA5A5A5),
-                            fontWeight: FontWeight.w400,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 70,
-                    width: 192,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x337856CE),
-                            blurRadius: 24,
-                            offset: Offset(0, 8),
-                          ),
-                        ]),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    height: 149,
-                    width: 123,
-                    padding: const EdgeInsets.all(15),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x337856CE),
-                            blurRadius: 24,
-                            offset: Offset(0, 8),
-                          ),
-                        ]),
-                    child: Column(children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.link,
-                            color: Color(0xFF7856CE),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "Current \nStreak",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7856CE),
-                                fontWeight: FontWeight.w600,
-                              ),
-                              shadows: <Shadow>[
-                                const Shadow(
-                                  offset: Offset(0, 8),
-                                  blurRadius: 24,
-                                  color: Color(0x337856CE),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "42",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w600,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Days",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFFA5A5A5),
-                            fontWeight: FontWeight.w400,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 149,
-                    width: 123,
-                    padding: const EdgeInsets.all(15),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x337856CE),
-                            blurRadius: 24,
-                            offset: Offset(0, 8),
-                          ),
-                        ]),
-                    child: Column(children: [
-                      Text(
-                        "Best \nStreak",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w600,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "112",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w600,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Days",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFFA5A5A5),
-                            fontWeight: FontWeight.w400,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ]),
+        StaggeredGrid.count(
+          crossAxisCount: 9,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          children: [
+            StaggeredGridTile.count(
+              crossAxisCellCount: 5,
+              mainAxisCellCount: 8,
+              child: percentCard(
+                  "Avg Completion \nRate", Icons.check_circle_rounded, 0.8),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 4,
+              child: streaksCard("Current \nStreak", 42, "Days", Icons.link),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 4,
+              child: streaksCard("Best \nStreak", 112, "Days", Icons.link),
+            ),
+          ],
+        ),
         const SizedBox(height: 50),
         Text(
           "Habit History",
@@ -393,6 +146,10 @@ Widget analyticsBody(BuildContext context) {
                   offset: Offset(0, 8),
                 ),
               ]),
+          child: SfCalendar(
+            view: CalendarView.month,
+            firstDayOfWeek: 1,
+          ),
         ),
         const SizedBox(
           height: 110,
