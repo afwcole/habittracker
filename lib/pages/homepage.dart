@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: analyticsBody(context),
+      body: const AnalyticsPage(),
       extendBody: true,
       floatingActionButton: FloatingActionButton(
         elevation: 10,
