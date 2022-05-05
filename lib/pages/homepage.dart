@@ -8,16 +8,20 @@ import 'package:habittracker/widgets/horizontal_calendar.dart';
 import 'package:habittracker/widgets/build_habit_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _homepageSelected = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: AnalyticsPage(
-        habit: UserDataProvider().habitList[0],
-      ),
+      body: mainBody(context),
       extendBody: true,
       floatingActionButton: FloatingActionButton(
         elevation: 10,
@@ -39,34 +43,7 @@ class HomePage extends StatelessWidget {
           size: 32,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        elevation: 20,
-        color: const Color(0xFFF9F7FF),
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 6,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Color(0xFF7856CE),
-              ),
-              padding: const EdgeInsets.all(15),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.equalizer,
-                color: Color(0xFF7856CE),
-              ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

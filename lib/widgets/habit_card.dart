@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/pages/analytics_page.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/widgets/habit_card_button.dart';
 import 'package:provider/provider.dart';
@@ -92,12 +93,21 @@ class _HabitCardState extends State<HabitCard> {
                       habit: widget.habit, isCompletionButton: false),
                   Container(
                     child: IconButton(
-                        icon: const Icon(
-                          Icons.equalizer,
-                        ),
-                        onPressed: () {},
-                        color: Colors.white,
-                        iconSize: 19),
+                      icon: const Icon(
+                        Icons.equalizer,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AnalyticsPage(habit: widget.habit)),
+                        );
+                        print("Push");
+                      },
+                      color: Colors.white,
+                      iconSize: 19,
+                    ),
                     decoration: const BoxDecoration(
                         color: Color(0xFF7856CE),
                         shape: BoxShape.circle,
