@@ -5,14 +5,14 @@ import 'package:habittracker/widgets/frequency_option_widget.dart';
 import 'package:habittracker/widgets/simple_toggle.dart';
 import 'package:provider/provider.dart';
 
-class BuildHabitBottomSheet extends StatefulWidget {
-  const BuildHabitBottomSheet({Key? key}) : super(key: key);
+class BuildBottomSheet extends StatefulWidget {
+  const BuildBottomSheet({Key? key}) : super(key: key);
 
   @override
-  State<BuildHabitBottomSheet> createState() => _BuildHabitBottomSheetState();
+  State<BuildBottomSheet> createState() => _BuildBottomSheetState();
 }
 
-class _BuildHabitBottomSheetState extends State<BuildHabitBottomSheet> {
+class _BuildBottomSheetState extends State<BuildBottomSheet> {
   final List<String> selectedOptions = [];
   final List<int> selectedDays = [];
   bool notificationSwitch = false;

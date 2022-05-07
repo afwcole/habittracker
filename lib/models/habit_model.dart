@@ -1,14 +1,44 @@
+import 'dart:convert';
+
 class HabitModel {
   final int habitID;
   final String habitName;
   final String frequencyType;
   final DateTime startDate;
-  final List<int> selectedFrequencyDays;
-  final Map<DateTime, String?> habitHistory;
+  final List selectedFrequencyDays;
+  final Map habitHistory;
   final bool notification;
 
   HabitModel(this.habitID, this.habitName, this.frequencyType, this.startDate,
       this.selectedFrequencyDays, this.habitHistory, this.notification);
+
+  //From JSON
+  HabitModel.fromJson(Map<String, dynamic> json)
+      : habitID = json['habitID'],
+        habitName = json['habitName'],
+        frequencyType = json['frequencyType'],
+        startDate = DateTime.parse(json['startDate'] ?? ''),
+        selectedFrequencyDays = json['selectedFrequencyDays'],
+        habitHistory = jsonDecode(
+          json["habitHistory"],
+        ).map((key, value) {
+          return MapEntry(DateTime.parse(key), value);
+        }),
+        notification = json['notification'];
+
+  //Convert ot JSON
+  Map<String, dynamic> toJson() => {
+        'habitID': habitID,
+        'habitName': habitName,
+        'frequencyType': frequencyType,
+        'startDate': startDate.toIso8601String(),
+        'selectedFrequencyDays': selectedFrequencyDays,
+        'habitHistory': jsonEncode(habitHistory, toEncodable: (input) {
+          return habitHistory
+              .map((key, value) => MapEntry(key.toIso8601String(), value));
+        }),
+        'notification': notification,
+      };
 
   Map<String, int> getStatsInRange(int range) {
     int _historyLength = habitHistory.entries.length;

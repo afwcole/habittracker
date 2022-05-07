@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
-import 'package:habittracker/pages/analytics_page.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
 import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
-import 'package:habittracker/widgets/build_habit_bottom_sheet.dart';
+import 'package:habittracker/widgets/build_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _homepageSelected = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: const Color(0xFFF9F7FF),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
-            builder: (context) => const BuildHabitBottomSheet(),
+            builder: (context) => const BuildBottomSheet(),
           );
         },
         child: const Icon(

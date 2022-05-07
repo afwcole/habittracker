@@ -103,7 +103,6 @@ class _HabitCardState extends State<HabitCard> {
                               builder: (context) =>
                                   AnalyticsPage(habit: widget.habit)),
                         );
-                        print("Push");
                       },
                       color: Colors.white,
                       iconSize: 19,
@@ -129,7 +128,7 @@ class _HabitCardState extends State<HabitCard> {
   }
 }
 
-Widget weeklyStreak(BuildContext context, Map<DateTime, String?> habitHistory) {
+Widget weeklyStreak(BuildContext context, Map habitHistory) {
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: Row(

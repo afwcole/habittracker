@@ -52,42 +52,55 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 36),
-            BackButton(onPressed: () {
-              Navigator.pop(context);
-            }),
-            Text(
-              widget.habit.habitName,
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 24,
-                  color: Color(0xFF7856CE),
-                  fontWeight: FontWeight.w800,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    color: const Color(0xFF7856CE),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.habit.habitName,
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 24,
+                          color: Color(0xFF7856CE),
+                          fontWeight: FontWeight.w800,
+                        ),
+                        shadows: <Shadow>[
+                          const Shadow(
+                            offset: Offset(0, 8),
+                            blurRadius: 24,
+                            color: Color(0x337856CE),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      widget.habit.frequencyType,
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF808080),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        shadows: <Shadow>[
+                          const Shadow(
+                            offset: Offset(0, 8),
+                            blurRadius: 24,
+                            color: Color(0x337856CE),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                shadows: <Shadow>[
-                  const Shadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: Color(0x337856CE),
-                  ),
-                ],
-              ),
-            ),
-            Text(
-              widget.habit.frequencyType,
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF808080),
-                  fontWeight: FontWeight.w400,
-                ),
-                shadows: <Shadow>[
-                  const Shadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: Color(0x337856CE),
-                  ),
-                ],
-              ),
+              ],
             ),
             const SizedBox(
               height: 30,

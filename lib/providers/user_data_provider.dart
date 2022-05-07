@@ -1,62 +1,74 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDataProvider extends ChangeNotifier {
-  final List<HabitModel> _habitList = [
-    HabitModel(
-      1,
-      "Eat Breakfast",
-      "Daily",
-      DateTime.utc(2022, 4, 24),
-      [1, 2, 3, 4, 6],
-      {
-        DateTime.utc(2022, 4, 15): "Uncompleted",
-        DateTime.utc(2022, 4, 16): "Completed",
-        DateTime.utc(2022, 4, 17): "Completed",
-        DateTime.utc(2022, 4, 18): "Completed",
-        DateTime.utc(2022, 4, 19): "Completed",
-        DateTime.utc(2022, 4, 20): "Completed",
-        DateTime.utc(2022, 4, 21): "Completed",
-        DateTime.utc(2022, 4, 22): "Completed",
-        DateTime.utc(2022, 4, 24): "Completed",
-        DateTime.utc(2022, 4, 25): "Uncompleted",
-        DateTime.utc(2022, 4, 26): "Completed",
-        DateTime.utc(2022, 4, 27): "Completed",
-        DateTime.utc(2022, 4, 28): "Uncompleted",
-        DateTime.utc(2022, 4, 29): "Completed",
-        DateTime.utc(2022, 4, 30): "Completed",
-        toDMY(DateTime.now()): null,
-      },
-      true,
-    ),
-  ];
+  UserDataProvider() {
+    savePreferences();
+    loadPreferences();
+  }
+
+  List<HabitModel> _habitList = [];
 
   List<HabitModel> get habitList => _habitList;
 
-  void updateHabitHistory(HabitModel habit, DateTime date, String updateValue) {
+  String encodeHabitList() {
+    return json.encode(habitList
+        .map<Map<String, dynamic>>((habit) => habit.toJson())
+        .toList());
+  }
+
+  List<HabitModel> decodeHabitList(String encodedHabitList) {
+    return (json.decode(encodedHabitList) as List<dynamic>)
+        .map<HabitModel>((habit) => HabitModel.fromJson(habit))
+        .toList();
+  }
+
+  savePreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Serializes List object into String
+    String _encodedHabitList = encodeHabitList();
+    prefs.setString("habitList", _encodedHabitList);
+  }
+
+  loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? _encodedHabits = prefs.getString("habitList");
+
+    if (_encodedHabits != null) {
+      //De-serializes into the List Object
+      _habitList = decodeHabitList(_encodedHabits);
+      notifyListeners();
+      savePreferences();
+    }
+  }
+
+  void updateHabitHistory(
+      HabitModel habit, DateTime date, String updateValue) async {
     _habitList.firstWhere((element) => element == habit).habitHistory[date] =
         updateValue;
     notifyListeners();
+    savePreferences();
   }
 
   void addHabitToList(String habitName, String selectedOptions,
-      List<int> selectedDays, bool notificationSwitch) {
-    _habitList.add(
-      HabitModel(
-          _habitList.length,
-          habitName,
-          selectedOptions,
-          DateTime.now(),
-          selectedDays,
-          {
-            DateTime.utc(2022, 4, 25): "Uncompleted",
-            DateTime.utc(2022, 4, 26): "Completed",
-            DateTime.utc(2022, 4, 27): "Break",
-          },
-          notificationSwitch),
-    );
+      List<int> selectedDays, bool notificationSwitch) async {
+    _habitList.add(HabitModel(
+        _habitList.length,
+        habitName,
+        selectedOptions,
+        DateTime.now(),
+        selectedDays,
+        {
+          DateTime.utc(2022, 4, 25): "Uncompleted",
+          DateTime.utc(2022, 4, 26): "Completed",
+          DateTime.utc(2022, 4, 27): "Break",
+        },
+        notificationSwitch));
 
     notifyListeners();
+    savePreferences();
   }
 }
