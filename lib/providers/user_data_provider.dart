@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,8 +46,8 @@ class UserDataProvider extends ChangeNotifier {
 
   void updateHabitHistory(
       HabitModel habit, DateTime date, String updateValue) async {
-    _habitList.firstWhere((element) => element == habit).habitHistory[date] =
-        updateValue;
+    habit.habitHistory[date] = updateValue;
+    habit.sortHabitHistory();
     notifyListeners();
     savePreferences();
   }
@@ -67,7 +66,7 @@ class UserDataProvider extends ChangeNotifier {
           DateTime.utc(2022, 4, 27): "Break",
         },
         notificationSwitch));
-
+    _habitList.last.sortHabitHistory();
     notifyListeners();
     savePreferences();
   }

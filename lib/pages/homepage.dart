@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
           size: 32,
         ),
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

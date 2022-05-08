@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 class HabitModel {
@@ -6,11 +7,16 @@ class HabitModel {
   final String frequencyType;
   final DateTime startDate;
   final List selectedFrequencyDays;
-  final Map habitHistory;
+  Map habitHistory;
   final bool notification;
 
   HabitModel(this.habitID, this.habitName, this.frequencyType, this.startDate,
       this.selectedFrequencyDays, this.habitHistory, this.notification);
+
+  void sortHabitHistory() {
+    final Map fromMap = SplayTreeMap.from(habitHistory);
+    habitHistory = fromMap;
+  }
 
   //From JSON
   HabitModel.fromJson(Map<String, dynamic> json)
