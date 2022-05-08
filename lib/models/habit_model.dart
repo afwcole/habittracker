@@ -10,12 +10,12 @@ class HabitModel {
   final String habitName;
   final String frequencyType;
   final DateTime startDate;
-  final List selectedFrequencyDays;
+  final List selectedBreakDays;
   Map habitHistory;
   final bool notification;
 
   HabitModel(this.habitID, this.habitName, this.frequencyType, this.startDate,
-      this.selectedFrequencyDays, this.habitHistory, this.notification);
+      this.selectedBreakDays, this.habitHistory, this.notification);
 
   void sortHabitHistory() {
     final Map fromMap = SplayTreeMap.from(habitHistory);
@@ -44,7 +44,7 @@ class HabitModel {
         habitName = json['habitName'],
         frequencyType = json['frequencyType'],
         startDate = DateTime.parse(json['startDate'] ?? ''),
-        selectedFrequencyDays = json['selectedFrequencyDays'],
+        selectedBreakDays = json['selectedFrequencyDays'],
         habitHistory = jsonDecode(
           json["habitHistory"],
         ).map((key, value) {
@@ -58,7 +58,7 @@ class HabitModel {
         'habitName': habitName,
         'frequencyType': frequencyType,
         'startDate': startDate.toIso8601String(),
-        'selectedFrequencyDays': selectedFrequencyDays,
+        'selectedFrequencyDays': selectedBreakDays,
         'habitHistory': jsonEncode(habitHistory, toEncodable: (input) {
           return habitHistory
               .map((key, value) => MapEntry(key.toIso8601String(), value));

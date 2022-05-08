@@ -120,9 +120,9 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                             )),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 35),
                     Text(
-                      "Choose frequency",
+                      "Choose break days",
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
@@ -138,11 +138,11 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    FrequencyOptionsSection(
+                    const SizedBox(height: 20),
+                    BreakDaysSection(
                         selectedDays: selectedDays,
                         selectedOptions: selectedOptions),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
                     Text(
                       "Notifications",
                       style: GoogleFonts.poppins(
