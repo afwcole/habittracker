@@ -47,6 +47,7 @@ class UserDataProvider extends ChangeNotifier {
       for (var habitItem in _habitList) {
         habitItem.padHabitHistory();
       }
+
       notifyListeners();
       savePreferences();
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
-import 'package:habittracker/widgets/frequency_option_widget.dart';
+import 'package:habittracker/widgets/select_break_widget.dart';
 import 'package:habittracker/widgets/simple_toggle.dart';
 import 'package:provider/provider.dart';
 
