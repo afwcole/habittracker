@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BreakDaysSection extends StatefulWidget {
-  final List<String> selectedOptions;
-  final List<int> selectedDays;
+  final List<int> selectedBreakDays;
 
-  const BreakDaysSection(
-      {Key? key, required this.selectedOptions, required this.selectedDays})
+  const BreakDaysSection({Key? key, required this.selectedBreakDays})
       : super(key: key);
 
   @override
@@ -14,7 +12,6 @@ class BreakDaysSection extends StatefulWidget {
 }
 
 class _BreakDaysSectionState extends State<BreakDaysSection> {
-  final List<String> allOptions = ["Daily", "Weekly", "Monthly"];
   final List<String> allDays = ["M", "T", "W", "T", "F", "S", "S"];
   final int maxSelectedOptions = 1;
   final int _maxSelectedOptions = 6;
@@ -26,23 +23,23 @@ class _BreakDaysSectionState extends State<BreakDaysSection> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            for (int j = 0; j < allDays.length; j++)
+            for (int weekdayInt = 0; weekdayInt < allDays.length; weekdayInt++)
               __breakDayOption(
                 context,
-                allDays[j],
-                widget.selectedDays.contains(j),
+                allDays[weekdayInt],
+                widget.selectedBreakDays.contains(weekdayInt),
                 () {
-                  if (!widget.selectedDays.contains(j)) {
+                  if (!widget.selectedBreakDays.contains(weekdayInt)) {
                     if (_maxSelectedOptions == 1 &&
-                        widget.selectedDays.length == 1) {
-                      widget.selectedDays.clear();
+                        widget.selectedBreakDays.length == 1) {
+                      widget.selectedBreakDays.clear();
                     } else if (_maxSelectedOptions ==
-                        widget.selectedDays.length) {
+                        widget.selectedBreakDays.length) {
                       return;
                     }
-                    widget.selectedDays.add(j);
+                    widget.selectedBreakDays.add(weekdayInt);
                   } else {
-                    widget.selectedDays.remove(j);
+                    widget.selectedBreakDays.remove(weekdayInt);
                   }
                   setState(() {});
                 },

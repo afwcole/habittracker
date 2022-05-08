@@ -56,7 +56,7 @@ class _HabitCardState extends State<HabitCard> {
                 ),
               ),
               Text(
-                widget.habit.frequencyType,
+                "Daily",
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 12,

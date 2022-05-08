@@ -13,8 +13,7 @@ class BuildBottomSheet extends StatefulWidget {
 }
 
 class _BuildBottomSheetState extends State<BuildBottomSheet> {
-  final List<String> selectedOptions = [];
-  final List<int> selectedDays = [];
+  final List<int> selectedBreakDays = [];
   bool notificationSwitch = false;
   String habitName = "";
   final _formKey = GlobalKey<FormState>();
@@ -139,9 +138,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    BreakDaysSection(
-                        selectedDays: selectedDays,
-                        selectedOptions: selectedOptions),
+                    BreakDaysSection(selectedBreakDays: selectedBreakDays),
                     const SizedBox(height: 20),
                     Text(
                       "Notifications",
@@ -187,11 +184,10 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
               padding: const EdgeInsets.all(20),
               child: GestureDetector(
                 onTap: () {
-                  if (_formKey.currentState!.validate() &&
-                      selectedOptions.isNotEmpty) {
+                  if (_formKey.currentState!.validate()) {
                     Provider.of<UserDataProvider>(context, listen: false)
-                        .addHabitToList(habitName, selectedOptions.first,
-                            selectedDays, notificationSwitch);
+                        .addHabitToList(
+                            habitName, selectedBreakDays, notificationSwitch);
                     Navigator.pop(context);
                   }
                 },

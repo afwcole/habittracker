@@ -82,7 +82,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       ),
                     ),
                     Text(
-                      widget.habit.frequencyType,
+                      "Daily",
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,

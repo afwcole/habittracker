@@ -8,13 +8,12 @@ import 'package:habittracker/providers/app_data_provider.dart';
 class HabitModel {
   final int habitID;
   final String habitName;
-  final String frequencyType;
   final DateTime startDate;
   final List selectedBreakDays;
   Map habitHistory;
   final bool notification;
 
-  HabitModel(this.habitID, this.habitName, this.frequencyType, this.startDate,
+  HabitModel(this.habitID, this.habitName, this.startDate,
       this.selectedBreakDays, this.habitHistory, this.notification);
 
   void sortHabitHistory() {
@@ -27,14 +26,20 @@ class HabitModel {
   }
 
   void padHabitHistory() {
+    DateTime addThisDate;
+
     if (habitHistory.isEmpty) return;
 
     DateTime lastRecordedDate = habitHistory.entries.last.key;
     int daysBetweenLastAndNow =
         AppDataProvider().today.difference(lastRecordedDate).inDays;
     for (int i = 1; i <= daysBetweenLastAndNow - 1; i++) {
-      habitHistory
-          .addAll({lastRecordedDate.add(Duration(days: i)): "Uncompleted"});
+      addThisDate = lastRecordedDate.add(Duration(days: i));
+      habitHistory.addAll({
+        addThisDate: selectedBreakDays.contains(addThisDate.weekday - 1)
+            ? "Break"
+            : "Uncompleted"
+      });
     }
   }
 
@@ -42,7 +47,6 @@ class HabitModel {
   HabitModel.fromJson(Map<String, dynamic> json)
       : habitID = json['habitID'],
         habitName = json['habitName'],
-        frequencyType = json['frequencyType'],
         startDate = DateTime.parse(json['startDate'] ?? ''),
         selectedBreakDays = json['selectedFrequencyDays'],
         habitHistory = jsonDecode(
@@ -56,7 +60,6 @@ class HabitModel {
   Map<String, dynamic> toJson() => {
         'habitID': habitID,
         'habitName': habitName,
-        'frequencyType': frequencyType,
         'startDate': startDate.toIso8601String(),
         'selectedFrequencyDays': selectedBreakDays,
         'habitHistory': jsonEncode(habitHistory, toEncodable: (input) {

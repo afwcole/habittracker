@@ -60,12 +60,11 @@ class UserDataProvider extends ChangeNotifier {
     savePreferences();
   }
 
-  void addHabitToList(String habitName, String selectedOptions,
-      List<int> selectedDays, bool notificationSwitch) async {
+  void addHabitToList(
+      String habitName, List<int> selectedDays, bool notificationSwitch) async {
     _habitList.add(HabitModel(
         _habitList.length,
         habitName,
-        selectedOptions,
         DateTime.now(),
         selectedDays,
         {
