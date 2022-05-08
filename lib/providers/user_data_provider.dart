@@ -25,6 +25,11 @@ class UserDataProvider extends ChangeNotifier {
         .toList();
   }
 
+  clearHabitList() {
+    _habitList.clear();
+    savePreferences();
+  }
+
   savePreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Serializes List object into String
@@ -39,6 +44,9 @@ class UserDataProvider extends ChangeNotifier {
     if (_encodedHabits != null) {
       //De-serializes into the List Object
       _habitList = decodeHabitList(_encodedHabits);
+      for (var habitItem in _habitList) {
+        habitItem.padHabitHistory();
+      }
       notifyListeners();
       savePreferences();
     }

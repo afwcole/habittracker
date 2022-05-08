@@ -9,11 +9,9 @@ class AppDataProvider extends ChangeNotifier {
 
   List<DateTime> getWeekDateList() {
     List<DateTime> weekDatesList = [];
-
     for (int i = 0; i < 7; i++) {
       weekDatesList.add(thisWeekStartDate.add(Duration(days: i)));
     }
-
     return weekDatesList;
   }
 

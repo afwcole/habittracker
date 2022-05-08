@@ -1,5 +1,9 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'dart:collection';
 import 'dart:convert';
+
+import 'package:habittracker/providers/app_data_provider.dart';
 
 class HabitModel {
   final int habitID;
@@ -16,6 +20,22 @@ class HabitModel {
   void sortHabitHistory() {
     final Map fromMap = SplayTreeMap.from(habitHistory);
     habitHistory = fromMap;
+  }
+
+  void clearHabitHistory() {
+    habitHistory.clear();
+  }
+
+  void padHabitHistory() {
+    if (habitHistory.isEmpty) return;
+
+    DateTime lastRecordedDate = habitHistory.entries.last.key;
+    int daysBetweenLastAndNow =
+        AppDataProvider().today.difference(lastRecordedDate).inDays;
+    for (int i = 1; i <= daysBetweenLastAndNow - 1; i++) {
+      habitHistory
+          .addAll({lastRecordedDate.add(Duration(days: i)): "Uncompleted"});
+    }
   }
 
   //From JSON

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:habittracker/providers/app_data_provider.dart';
 
 List<DateTime> getWeekDateList() {
-  DateTime today = toDMY(DateTime.now());
+  DateTime today = AppDataProvider().today;
   DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
   List<DateTime> weekList = [];
   for (int i = 0; i < 7; i++) {
