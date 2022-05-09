@@ -41,6 +41,11 @@ class UserDataProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? _encodedHabits = prefs.getString("habitList");
 
+    //use this for testing empty habitlist otherwise remove it Debugging purposes only
+    if (false) {
+      return;
+    }
+
     if (_encodedHabits != null) {
       //De-serializes into the List Object
       _habitList = decodeHabitList(_encodedHabits);
@@ -61,12 +66,12 @@ class UserDataProvider extends ChangeNotifier {
     savePreferences();
   }
 
-  void addHabitToList(
-      String habitName, List<int> selectedDays, bool notificationSwitch) async {
+  void addHabitToList(String habitName, DateTime startDate,
+      List<int> selectedDays, bool notificationSwitch) async {
     _habitList.add(HabitModel(
         _habitList.length,
         habitName,
-        DateTime.now(),
+        startDate,
         selectedDays,
         {
           DateTime.utc(2022, 4, 25): "Uncompleted",

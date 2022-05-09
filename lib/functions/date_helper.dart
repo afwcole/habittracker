@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 
+List<String> _weekdays3 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+List<String> _weekdays1 = ["M", "T", "W", "T", "F", "S", "S"];
+List<String> _months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 List<DateTime> getWeekDateList() {
   DateTime today = AppDataProvider().today;
   DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));
@@ -17,27 +34,15 @@ DateTime toDMY(DateTime dateTime) {
 }
 
 String weekdayToISOString(int weekday, int noOfLetters) {
-  List<String> weekdays3 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  List<String> weekdays1 = ["M", "T", "W", "T", "F", "S", "S"];
-  return noOfLetters == 1 ? weekdays1[weekday - 1] : weekdays3[weekday - 1];
+  return noOfLetters == 1 ? _weekdays1[weekday - 1] : _weekdays3[weekday - 1];
+}
+
+String displayDateStr(DateTime date) {
+  return "${_weekdays3[date.weekday - 1]}, ${date.day}th ${_months[date.month - 1]}";
 }
 
 String monthToISOString(int month) {
-  List<String> months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-  return months[month - 1];
+  return _months[month - 1];
 }
 
 Color getDateIconColor(String? activity) {

@@ -36,45 +36,45 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserDataProvider>(
-        builder: (context, userDataProvider, child) => MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Habit',
-              theme: ThemeData(
-                fontFamily: GoogleFonts.poppins().fontFamily,
-                scaffoldBackgroundColor: const Color(0xFFF9F7FF),
-              ),
-              home: Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: userDataProvider.habitList.isEmpty
-                    ? EmptyStateBody()
-                    : const HomePage(),
-                extendBody: true,
-                floatingActionButton: userDataProvider.habitList.isEmpty
-                    ? null
-                    : FloatingActionButton(
-                        elevation: 10,
-                        backgroundColor: const Color(0xFF7856CE),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            constraints: BoxConstraints(
-                                maxHeight:
-                                    MediaQuery.of(context).size.height * 0.8),
-                            context: context,
-                            backgroundColor: const Color(0xFFF9F7FF),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(25))),
-                            builder: (context) => const BuildBottomSheet(),
-                          );
-                        },
-                        child: const Icon(
-                          Icons.add,
-                          size: 32,
-                        ),
-                      ),
-              ),
-            ));
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Habit',
+      theme: ThemeData(
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        scaffoldBackgroundColor: const Color(0xFFF9F7FF),
+      ),
+      home: Consumer<UserDataProvider>(
+        builder: (context, userDataProvider, child) => Scaffold(
+          resizeToAvoidBottomInset: true,
+          body: userDataProvider.habitList.isEmpty
+              ? EmptyStateBody()
+              : const HomePage(),
+          extendBody: true,
+          floatingActionButton: userDataProvider.habitList.isEmpty
+              ? null
+              : FloatingActionButton(
+                  elevation: 10,
+                  backgroundColor: const Color(0xFF7856CE),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.8),
+                      context: context,
+                      backgroundColor: const Color(0xFFF9F7FF),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(25))),
+                      builder: (context) => const BuildBottomSheet(),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    size: 32,
+                  ),
+                ),
+        ),
+      ),
+    );
   }
 }
