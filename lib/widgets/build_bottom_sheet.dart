@@ -170,9 +170,10 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    GestureDetector(
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
                       onTap: () => _startDate(context),
-                      child: Container(
+                      child: Ink(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 15),
                         decoration: const BoxDecoration(

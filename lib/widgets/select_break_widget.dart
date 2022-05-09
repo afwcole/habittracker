@@ -60,9 +60,10 @@ Widget __breakDayOption(
   bool isSelected,
   VoidCallback onTap,
 ) {
-  return GestureDetector(
+  return InkWell(
+    borderRadius: BorderRadius.circular(10),
     onTap: onTap,
-    child: Container(
+    child: Ink(
       decoration: isSelected ? _selectedDecoration() : _defaultDecoration(),
       height: 38,
       width: 38,

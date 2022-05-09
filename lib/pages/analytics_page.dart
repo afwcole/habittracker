@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/widgets/custom_calendar.dart';
 import 'package:habittracker/widgets/range_picker_widget.dart';
 import 'package:habittracker/widgets/streaks_card.dart';
 import 'package:habittracker/widgets/percent_card.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AnalyticsPage extends StatefulWidget {
   final HabitModel habit;
@@ -190,8 +190,8 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               height: 15,
             ),
             Container(
-              height: 300,
-              width: 400,
+              height: 400,
+              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -205,11 +205,8 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       offset: Offset(0, 8),
                     ),
                   ]),
-              child: SfCalendar(
-                view: CalendarView.month,
-                firstDayOfWeek: 1,
-                cellBorderColor: Colors.transparent,
-                todayHighlightColor: const Color(0xFF7856CE),
+              child: CustomCalendar(
+                habit: widget.habit,
               ),
             ),
             const SizedBox(

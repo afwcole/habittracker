@@ -18,6 +18,10 @@ List<String> _months = [
   "December",
 ];
 
+List<String> get weekDays1 => _weekdays1;
+
+List<String> get months => _months;
+
 List<DateTime> getWeekDateList() {
   DateTime today = AppDataProvider().today;
   DateTime weekStartDate = today.subtract(Duration(days: today.weekday - 1));

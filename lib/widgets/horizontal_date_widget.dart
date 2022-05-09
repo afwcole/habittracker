@@ -18,9 +18,10 @@ class HorizontalDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(25),
       onTap: isDisabled ? null : onTap,
-      child: Container(
+      child: Ink(
         width: 40,
         decoration: isDisabled
             ? null
