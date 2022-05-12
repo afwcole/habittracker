@@ -190,8 +190,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               height: 15,
             ),
             Container(
-              height: 400,
-              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -211,7 +209,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
             ),
             const SizedBox(
               height: 110,
-            )
+            ),
           ],
         ),
       ),
