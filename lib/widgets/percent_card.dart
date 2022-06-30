@@ -61,7 +61,7 @@ Widget percentCard(
         ],
       ),
       CircularPercentIndicator(
-        radius: 130.0,
+        radius: 70.0,
         lineWidth: 9.0,
         percent: percentValue,
         progressColor: indicatorColor,

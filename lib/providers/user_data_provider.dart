@@ -68,17 +68,8 @@ class UserDataProvider extends ChangeNotifier {
 
   void addHabitToList(String habitName, DateTime startDate,
       List<int> selectedDays, bool notificationSwitch) async {
-    _habitList.add(HabitModel(
-        _habitList.length,
-        habitName,
-        startDate,
-        selectedDays,
-        {
-          DateTime.utc(2022, 4, 25): "Uncompleted",
-          DateTime.utc(2022, 4, 26): "Completed",
-          DateTime.utc(2022, 4, 27): "Break",
-        },
-        notificationSwitch));
+    _habitList.add(HabitModel(_habitList.length, habitName, startDate,
+        selectedDays, {}, notificationSwitch));
     _habitList.last.sortHabitHistory();
     notifyListeners();
     savePreferences();

@@ -331,6 +331,16 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           child: Container(
                             width: 110,
                             padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF7856CE),
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x337856CE),
+                                    blurRadius: 24,
+                                    offset: Offset(0, 8),
+                                  ),
+                                ]),
                             child: Center(
                               child: Text(
                                 "Uncompleted",
@@ -343,16 +353,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                 ),
                               ),
                             ),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF7856CE),
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x337856CE),
-                                    blurRadius: 24,
-                                    offset: Offset(0, 8),
-                                  ),
-                                ]),
                           ),
                         ),
                       ],
