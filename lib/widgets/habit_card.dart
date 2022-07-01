@@ -47,6 +47,8 @@ class _HabitCardState extends State<HabitCard> {
             children: [
               Text(
                 widget.habit.habitName,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 14,
@@ -59,9 +61,9 @@ class _HabitCardState extends State<HabitCard> {
                 "Daily",
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: Color(0xFF7856CE),
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
@@ -92,6 +94,16 @@ class _HabitCardState extends State<HabitCard> {
                   HabitCardButton(
                       habit: widget.habit, isCompletionButton: false),
                   Container(
+                    decoration: const BoxDecoration(
+                        color: Color(0xFF7856CE),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x337856CE),
+                            blurRadius: 24,
+                            offset: Offset(0, 8),
+                          ),
+                        ]),
                     child: IconButton(
                       icon: const Icon(
                         Icons.equalizer,
@@ -107,16 +119,6 @@ class _HabitCardState extends State<HabitCard> {
                       color: Colors.white,
                       iconSize: 19,
                     ),
-                    decoration: const BoxDecoration(
-                        color: Color(0xFF7856CE),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x337856CE),
-                            blurRadius: 24,
-                            offset: Offset(0, 8),
-                          ),
-                        ]),
                   ),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,44 +62,28 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       }),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.habit.habitName,
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xFF7856CE),
-                            fontWeight: FontWeight.w800,
-                          ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
+                  Expanded(
+                    child: AutoSizeText(
+                      widget.habit.habitName,
+                      overflow: TextOverflow.ellipsis,
+                      minFontSize: 16,
+                      maxLines: 2,
+                      softWrap: true,
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 24,
+                          color: Color(0xFF7856CE),
+                          fontWeight: FontWeight.w800,
                         ),
-                      ),
-                      Text(
-                        "Daily",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF808080),
-                            fontWeight: FontWeight.w400,
+                        shadows: <Shadow>[
+                          const Shadow(
+                            offset: Offset(0, 8),
+                            blurRadius: 24,
+                            color: Color(0x337856CE),
                           ),
-                          shadows: <Shadow>[
-                            const Shadow(
-                              offset: Offset(0, 8),
-                              blurRadius: 24,
-                              color: Color(0x337856CE),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
