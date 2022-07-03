@@ -1,12 +1,12 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/pages/analytics_page.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/habit_card_button.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +25,7 @@ class _HabitCardState extends State<HabitCard> {
         builder: (context, userDataProvider, child) => Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: const BoxDecoration(
-                  color: Color(0xFFDDD0FC),
+                  color: COLOR_SECONDARY,
                   borderRadius: BorderRadius.all(
                     Radius.circular(25),
                   ),
@@ -39,7 +39,7 @@ class _HabitCardState extends State<HabitCard> {
               child: ExpandablePanel(
                 theme: const ExpandableThemeData(
                   iconPadding: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                  iconColor: Color(0xFF7856CE),
+                  iconColor: COLOR_PRIMARY,
                   inkWellBorderRadius: BorderRadius.all(
                     Radius.circular(25),
                   ),
@@ -56,7 +56,7 @@ class _HabitCardState extends State<HabitCard> {
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF7856CE),
+                            color: COLOR_PRIMARY,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -66,7 +66,7 @@ class _HabitCardState extends State<HabitCard> {
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF7856CE),
+                            color: COLOR_PRIMARY,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -99,7 +99,7 @@ class _HabitCardState extends State<HabitCard> {
                               habit: widget.habit, isCompletionButton: false),
                           Container(
                             decoration: const BoxDecoration(
-                                color: Color(0xFF7856CE),
+                                color: COLOR_PRIMARY,
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
@@ -156,7 +156,7 @@ Widget cardDateIcon(BuildContext context, DateTime date, String? activity) {
       children: [
         Icon(
           userDataProvider.isSelectedDate(date) ? Icons.circle : null,
-          color: const Color(0xFF7856CE),
+          color: COLOR_PRIMARY,
           size: 7,
         ),
         const SizedBox(
@@ -167,7 +167,7 @@ Widget cardDateIcon(BuildContext context, DateTime date, String? activity) {
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
-              color: Color(0xFF7856CE),
+              color: COLOR_PRIMARY,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -182,7 +182,7 @@ Widget cardDateIcon(BuildContext context, DateTime date, String? activity) {
           decoration: BoxDecoration(
             border: activity == "Break"
                 ? Border.all(
-                    color: const Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     width: 2,
                   )
                 : null,
@@ -195,7 +195,7 @@ Widget cardDateIcon(BuildContext context, DateTime date, String? activity) {
               textStyle: TextStyle(
                 fontSize: 14,
                 color: activity == "Break" || activity == null
-                    ? const Color(0xFF7856CE)
+                    ? COLOR_PRIMARY
                     : Colors.white,
                 fontWeight: FontWeight.w600,
               ),

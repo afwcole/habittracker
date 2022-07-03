@@ -68,63 +68,61 @@ class HabitModel {
       };
 
   Map<String, int> getStatsInRange(int range) {
-    int _historyLength = habitHistory.entries.length;
-    int _rangeCalculated = _historyLength > range ? range : _historyLength;
-    int _completedCount = 0;
-    int _uncompletedCount = 0;
-    int _breakCount = 0;
+    int historyLength = habitHistory.entries.length;
+    int rangeCalculated = historyLength > range ? range : historyLength;
+    int completedCount = 0;
+    int uncompletedCount = 0;
+    int breakCount = 0;
 
-    for (int i = _historyLength - 1;
-        i >= _historyLength - _rangeCalculated;
-        i--) {
+    for (int i = historyLength - 1; i >= historyLength - rangeCalculated; i--) {
       switch (habitHistory.values.elementAt(i)) {
         case "Completed":
           {
-            _completedCount++;
+            completedCount++;
             break;
           }
         case "Uncompleted":
           {
-            _uncompletedCount++;
+            uncompletedCount++;
             break;
           }
         case "Break":
           {
-            _breakCount++;
+            breakCount++;
             break;
           }
       }
     }
 
     return {
-      "total": _historyLength,
-      "range_calculated": _rangeCalculated,
-      "completed": _completedCount,
-      "uncompleted": _uncompletedCount,
-      "break": _breakCount,
+      "total": historyLength,
+      "range_calculated": rangeCalculated,
+      "completed": completedCount,
+      "uncompleted": uncompletedCount,
+      "break": breakCount,
     };
   }
 
   int getCurrentStreak() {
-    int _currentCount = 0;
+    int currentCount = 0;
     for (int i = habitHistory.entries.length - 1; i >= 0; i--) {
       if (habitHistory.values.elementAt(i) == "Uncompleted") break;
-      _currentCount++;
+      currentCount++;
     }
-    return _currentCount;
+    return currentCount;
   }
 
   int getBestStreak() {
-    int _bestCount = 0;
-    int _count = 0;
+    int bestCount = 0;
+    int count = 0;
     for (int i = habitHistory.entries.length - 1; i >= 0; i--) {
       if (habitHistory.values.elementAt(i) == "Uncompleted") {
-        _count = 0;
+        count = 0;
       } else {
-        _count++;
-        if (_count > _bestCount) _bestCount = _count;
+        count++;
+        if (count > bestCount) bestCount = count;
       }
     }
-    return _bestCount;
+    return bestCount;
   }
 }

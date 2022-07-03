@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 
 Widget streaksCard(String statTitle, int value, String units, IconData icon) {
   return Container(
@@ -23,7 +24,7 @@ Widget streaksCard(String statTitle, int value, String units, IconData icon) {
         style: GoogleFonts.poppins(
           textStyle: const TextStyle(
             fontSize: 12,
-            color: Color(0xFF7856CE),
+            color: COLOR_PRIMARY,
             fontWeight: FontWeight.w600,
           ),
           shadows: <Shadow>[
@@ -40,7 +41,7 @@ Widget streaksCard(String statTitle, int value, String units, IconData icon) {
         style: GoogleFonts.poppins(
           textStyle: const TextStyle(
             fontSize: 20,
-            color: Color(0xFF7856CE),
+            color: COLOR_PRIMARY,
             fontWeight: FontWeight.w600,
           ),
           shadows: <Shadow>[

@@ -33,17 +33,17 @@ class UserDataProvider extends ChangeNotifier {
   savePreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Serializes List object into String
-    String _encodedHabitList = encodeHabitList();
-    prefs.setString("habitList", _encodedHabitList);
+    String encodedHabitList = encodeHabitList();
+    prefs.setString("habitList", encodedHabitList);
   }
 
   loadPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? _encodedHabits = prefs.getString("habitList");
+    String? encodedHabits = prefs.getString("habitList");
 
-    if (_encodedHabits != null) {
+    if (encodedHabits != null) {
       //De-serializes into the List Object
-      _habitList = decodeHabitList(_encodedHabits);
+      _habitList = decodeHabitList(encodedHabits);
       for (var habitItem in _habitList) {
         habitItem.padHabitHistory();
       }

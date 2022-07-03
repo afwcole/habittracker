@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/models/habit_model.dart';
-import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
-import 'package:habittracker/widgets/habit_card_button.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 
 class CustomCalendar extends StatefulWidget {
@@ -20,10 +16,9 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  final _controller = PageController(initialPage: 1);
   int _selectedMonth = DateTime.now().month - 1;
   int _selectedYear = DateTime.utc(DateTime.now().year).year;
-  DateTime dateInView = DateTime(2022, 5);
+  DateTime dateInView = DateTime(DateTime.now().year, DateTime.now().month);
   CarouselController carouselController = CarouselController();
   bool showYearPicker = false;
   DateTime selectedDateToEdit = DateTime.utc(
@@ -51,7 +46,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       const EdgeInsets.symmetric(vertical: 13, horizontal: 20),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(25)),
-                      color: Color(0xFFDDD0FC),
+                      color: COLOR_SECONDARY,
                       boxShadow: [
                         BoxShadow(
                           color: Color(0x337856CE),
@@ -64,7 +59,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 12,
-                        color: Color(0xFF7856CE),
+                        color: COLOR_PRIMARY,
                         fontWeight: FontWeight.w600,
                       ),
                       shadows: <Shadow>[
@@ -107,6 +102,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                               _selectedYear = DateTime(2015 + index).year;
                               dateInView =
                                   DateTime(_selectedYear, _selectedMonth + 1);
+                              showYearPicker = !showYearPicker;
                             });
                           },
                           child: Container(
@@ -117,7 +113,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                   const BorderRadius.all(Radius.circular(50)),
                               color:
                                   DateTime(2015 + index).year == _selectedYear
-                                      ? const Color(0xFF7856CE)
+                                      ? COLOR_PRIMARY
                                       : Colors.transparent,
                             ),
                             child: Center(
@@ -129,7 +125,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                     color: DateTime(2015 + index).year ==
                                             _selectedYear
                                         ? Colors.white
-                                        : const Color(0xFF7856CE),
+                                        : COLOR_PRIMARY,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -161,8 +157,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           textStyle: TextStyle(
                             fontSize: 16,
                             color: itemIndex == _selectedMonth
-                                ? const Color(0xFF7856CE)
-                                : const Color(0xFFDDD0FC),
+                                ? COLOR_PRIMARY
+                                : COLOR_SECONDARY,
                             fontWeight: FontWeight.w600,
                           ),
                           shadows: <Shadow>[
@@ -201,7 +197,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                 fontSize: 14,
-                                color: Color(0xFF7856CE),
+                                color: COLOR_PRIMARY,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -257,6 +253,16 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           child: Container(
                             width: 110,
                             padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: COLOR_POSITIVE,
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x337856CE),
+                                    blurRadius: 24,
+                                    offset: Offset(0, 8),
+                                  ),
+                                ]),
                             child: Center(
                               child: Text(
                                 "Completed",
@@ -269,16 +275,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                 ),
                               ),
                             ),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFB3D264),
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x337856CE),
-                                    blurRadius: 24,
-                                    offset: Offset(0, 8),
-                                  ),
-                                ]),
                           ),
                         ),
                         GestureDetector(
@@ -292,31 +288,31 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15), //.all(10),
-                            child: Center(
-                              child: Text(
-                                "Break",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xFF7856CE),
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
+                                vertical: 10, horizontal: 15),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
-                                    color: const Color(0xFF7856CE), width: 2),
+                                border:
+                                    Border.all(color: COLOR_PRIMARY, width: 2),
                                 boxShadow: const [
                                   BoxShadow(
                                     color: Color(0x337856CE),
                                     blurRadius: 24,
                                     offset: Offset(0, 8),
                                   ),
-                                ]),
+                                ]), //.all(10),
+                            child: Center(
+                              child: Text(
+                                "Break",
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    color: COLOR_PRIMARY,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         GestureDetector(
@@ -332,7 +328,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                             width: 110,
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: const Color(0xFF7856CE),
+                                color: COLOR_PRIMARY,
                                 borderRadius: BorderRadius.circular(25),
                                 boxShadow: const [
                                   BoxShadow(
@@ -367,7 +363,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   Widget calendarDateWidget(int index, List<DateTime> datesToDisplay) {
     //final daysInMonth = DateTime(dateInView.year, dateInView.month + 1, 0).day;
     DateTime date = datesToDisplay[index];
-    final String _habitActivity = widget.habit.habitHistory[date] ?? " ";
+    final String habitActivity = widget.habit.habitHistory[date] ?? " ";
 
     return Column(
       children: [
@@ -376,7 +372,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   date.month == dateInView.month
               ? Icons.circle
               : null,
-          color: const Color(0xFF7856CE),
+          color: COLOR_PRIMARY,
           size: 7,
         ),
         const SizedBox(
@@ -384,15 +380,27 @@ class _CustomCalendarState extends State<CustomCalendar> {
         ),
         Container(
           height: 25,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: getDateIconColor(habitActivity)
+                .withOpacity(date.month == dateInView.month ? 1 : 0.5),
+            border: habitActivity == "Break"
+                ? Border.all(
+                    color: COLOR_PRIMARY
+                        .withOpacity(date.month == dateInView.month ? 1 : 0.5),
+                    width: 2,
+                  )
+                : null,
+          ),
           child: Center(
             child: Text(
               "${date.day}",
               style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                   fontSize: 12,
-                  color: _habitActivity.compareTo("Break") == 0 ||
-                          _habitActivity.compareTo(" ") == 0
-                      ? const Color(0xFF7856CE)
+                  color: habitActivity.compareTo("Break") == 0 ||
+                          habitActivity.compareTo(" ") == 0
+                      ? COLOR_PRIMARY
                           .withOpacity(date.month == dateInView.month ? 1 : 0.5)
                       : Colors.white.withOpacity(
                           date.month == dateInView.month ? 1 : 0.5),
@@ -400,18 +408,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 ),
               ),
             ),
-          ),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: getDateIconColor(_habitActivity)
-                .withOpacity(date.month == dateInView.month ? 1 : 0.5),
-            border: _habitActivity == "Break"
-                ? Border.all(
-                    color: const Color(0xFF7856CE)
-                        .withOpacity(date.month == dateInView.month ? 1 : 0.5),
-                    width: 2,
-                  )
-                : null,
           ),
         ),
       ],

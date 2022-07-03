@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/habit_card.dart';
 import 'package:habittracker/widgets/horizontal_calendar.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 32,
-                        color: Color(0xFF7856CE),
+                        color: COLOR_PRIMARY,
                         fontWeight: FontWeight.w800,
                       ),
                       shadows: <Shadow>[
@@ -48,7 +49,7 @@ class HomePage extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF7856CE),
+                        color: COLOR_PRIMARY,
                         fontWeight: FontWeight.w400,
                       ),
                       shadows: <Shadow>[
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 24,
-                        color: Color(0xFF7856CE),
+                        color: COLOR_PRIMARY,
                         fontWeight: FontWeight.w600,
                       ),
                       shadows: <Shadow>[
@@ -124,7 +125,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 80,
+              height: 100,
             )
           ],
         ),

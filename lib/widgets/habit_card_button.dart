@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 
 class HabitCardButton extends StatefulWidget {
@@ -31,8 +32,8 @@ class _HabitCardButtonState extends State<HabitCardButton> {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: widget.isCompletionButton
-                  ? const Color(0xFFB3D264)
-                  : const Color(0xFF7856CE),
+                  ? COLOR_POSITIVE
+                  : const Color(0xFFCE5670),
               borderRadius: const BorderRadius.all(
                 Radius.circular(25),
               ),

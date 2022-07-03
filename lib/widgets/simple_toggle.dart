@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 
 class SimpleToggle extends StatelessWidget {
   final bool isSwitched;
@@ -20,7 +21,7 @@ class SimpleToggle extends StatelessWidget {
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
-              color: Color(0xFF7856CE),
+              color: COLOR_PRIMARY,
               fontWeight: FontWeight.w400,
             ),
             shadows: <Shadow>[
@@ -35,8 +36,8 @@ class SimpleToggle extends StatelessWidget {
         Switch(
           value: isSwitched,
           onChanged: onChanged,
-          activeTrackColor: const Color(0xFFDDD0FC),
-          activeColor: const Color(0xFF7856CE),
+          activeTrackColor: COLOR_SECONDARY,
+          activeColor: COLOR_PRIMARY,
         ),
       ],
     );

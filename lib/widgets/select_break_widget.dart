@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 
 class BreakDaysSection extends StatefulWidget {
   final List selectedBreakDays;
@@ -73,7 +74,7 @@ Widget __breakDayOption(
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
-              color: Color(0xFF7856CE),
+              color: COLOR_PRIMARY,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -85,8 +86,8 @@ Widget __breakDayOption(
 
 Decoration _selectedDecoration() {
   return BoxDecoration(
-    color: const Color(0xFFDDD0FC),
-    border: Border.all(color: const Color(0xFF7856CE), width: 2),
+    color: COLOR_SECONDARY,
+    border: Border.all(color: COLOR_PRIMARY, width: 2),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
   );
 }

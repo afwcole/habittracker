@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 
 List<String> _weekdays3 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 List<String> _weekdays1 = ["M", "T", "W", "T", "F", "S", "S"];
@@ -53,12 +54,12 @@ Color getDateIconColor(String? activity) {
   switch (activity) {
     case "Completed":
       {
-        return const Color(0xFFB3D264);
+        return COLOR_POSITIVE;
       }
 
     case "Uncompleted":
       {
-        return const Color(0xFFE85F4D);
+        return COLOR_NEGATIVE;
       }
     case null:
       {

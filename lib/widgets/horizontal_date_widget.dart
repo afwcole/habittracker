@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 
 class HorizontalDateWidget extends StatelessWidget {
   final DateTime date;
@@ -38,7 +39,7 @@ class HorizontalDateWidget extends StatelessWidget {
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF7856CE),
+                  color: COLOR_PRIMARY,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -51,7 +52,7 @@ class HorizontalDateWidget extends StatelessWidget {
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF7856CE),
+                  color: COLOR_PRIMARY,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -69,7 +70,7 @@ class HorizontalDateWidget extends StatelessWidget {
 Decoration _selectedDecoration() {
   return BoxDecoration(
       color: Colors.white,
-      border: Border.all(color: const Color(0xFF7856CE), width: 2),
+      border: Border.all(color: COLOR_PRIMARY, width: 2),
       borderRadius: const BorderRadius.all(Radius.circular(25)),
       boxShadow: const [
         BoxShadow(
@@ -82,7 +83,7 @@ Decoration _selectedDecoration() {
 
 Decoration _defaultDecoration() {
   return const BoxDecoration(
-      color: Color(0xFFDDD0FC),
+      color: COLOR_SECONDARY,
       borderRadius: BorderRadius.all(Radius.circular(25)),
       boxShadow: [
         BoxShadow(

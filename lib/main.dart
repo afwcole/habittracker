@@ -6,6 +6,7 @@ import 'package:habittracker/pages/empty_state_page.dart';
 import 'package:habittracker/pages/homepage.dart';
 import 'package:habittracker/providers/app_data_provider.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/build_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -46,15 +47,18 @@ class MyApp extends StatelessWidget {
       home: Consumer<UserDataProvider>(
         builder: (context, userDataProvider, child) => Scaffold(
           resizeToAvoidBottomInset: true,
-          body: userDataProvider.habitList.isEmpty
-              ? EmptyStateBody()
-              : const HomePage(),
+          body: SafeArea(
+            bottom: false,
+            child: userDataProvider.habitList.isEmpty
+                ? EmptyStateBody()
+                : const HomePage(),
+          ),
           extendBody: true,
           floatingActionButton: userDataProvider.habitList.isEmpty
               ? null
               : FloatingActionButton(
                   elevation: 10,
-                  backgroundColor: const Color(0xFF7856CE),
+                  backgroundColor: COLOR_PRIMARY,
                   onPressed: () {
                     showModalBottomSheet(
                       isScrollControlled: true,

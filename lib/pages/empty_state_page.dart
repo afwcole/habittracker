@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/build_bottom_sheet.dart';
 
 class EmptyStateBody extends StatelessWidget {
@@ -35,7 +36,7 @@ class EmptyStateBody extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 32,
-                    color: Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     fontWeight: FontWeight.w800,
                   ),
                   shadows: <Shadow>[
@@ -57,7 +58,7 @@ class EmptyStateBody extends StatelessWidget {
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18,
-                      color: Color(0xFF7856CE),
+                      color: COLOR_PRIMARY,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -81,7 +82,7 @@ class EmptyStateBody extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.arrow_downward_rounded,
-                  color: Color(0xFF7856CE),
+                  color: COLOR_PRIMARY,
                 ),
               ],
             ),
@@ -104,7 +105,7 @@ class EmptyStateBody extends StatelessWidget {
               },
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(

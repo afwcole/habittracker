@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/build_edit_bottom_sheet.dart';
 import 'package:habittracker/widgets/custom_calendar.dart';
 import 'package:habittracker/widgets/range_picker_widget.dart';
@@ -56,7 +57,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         elevation: 10,
-        backgroundColor: const Color(0xFF7856CE),
+        backgroundColor: COLOR_PRIMARY,
         onPressed: () {
           showModalBottomSheet(
             isScrollControlled: true,
@@ -88,7 +89,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 children: [
                   IconButton(
                       icon: const Icon(Icons.arrow_back_ios),
-                      color: const Color(0xFF7856CE),
+                      color: COLOR_PRIMARY,
                       onPressed: () {
                         Navigator.pop(context);
                       }),
@@ -102,7 +103,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 24,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w800,
                         ),
                         shadows: <Shadow>[
@@ -142,7 +143,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 16,
-                    color: Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     fontWeight: FontWeight.w600,
                   ),
                   shadows: <Shadow>[
@@ -189,7 +190,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 16,
-                    color: Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     fontWeight: FontWeight.w600,
                   ),
                   shadows: <Shadow>[
@@ -223,7 +224,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 ),
               ),
               const SizedBox(
-                height: 110,
+                height: 120,
               ),
             ],
           ),

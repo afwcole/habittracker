@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:habittracker/widgets/select_break_widget.dart';
 import 'package:habittracker/widgets/simple_toggle.dart';
 import 'package:provider/provider.dart';
@@ -34,10 +35,10 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                 GoogleFonts.poppins(fontWeight: FontWeight.w600).fontFamily,
           ).copyWith(
             colorScheme: const ColorScheme.dark(
-              primary: Color(0xFF7856CE),
+              primary: COLOR_PRIMARY,
               onPrimary: Colors.white,
               surface: Color(0xFFF9F7FF),
-              onSurface: Color(0xFF7856CE),
+              onSurface: COLOR_PRIMARY,
             ),
             dialogBackgroundColor: const Color(0xFFF9F7FF),
           ),
@@ -70,7 +71,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color(0xFF7856CE),
+                            color: COLOR_PRIMARY,
                             fontWeight: FontWeight.w600,
                           ),
                           shadows: <Shadow>[
@@ -91,7 +92,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -122,7 +123,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      cursorColor: const Color(0xFF7856CE),
+                      cursorColor: COLOR_PRIMARY,
                       decoration: InputDecoration(
                         hintText: 'Enter the name of the habit',
                         enabledBorder: OutlineInputBorder(
@@ -157,7 +158,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -178,14 +179,14 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                             vertical: 10, horizontal: 15),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Color(0xFFDDD0FC),
+                          color: COLOR_SECONDARY,
                         ),
                         child: Text(
                           displayDateStr(startDate),
                           style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                               fontSize: 14,
-                              color: Color(0xFF7856CE),
+                              color: COLOR_PRIMARY,
                               fontWeight: FontWeight.w400,
                             ),
                             shadows: <Shadow>[
@@ -205,7 +206,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -225,7 +226,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -273,7 +274,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                 },
                 child: Container(
                   decoration: const BoxDecoration(
-                      color: Color(0xFF7856CE),
+                      color: COLOR_PRIMARY,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       boxShadow: [
                         BoxShadow(

@@ -7,6 +7,8 @@ import 'package:habittracker/widgets/select_break_widget.dart';
 import 'package:habittracker/widgets/simple_toggle.dart';
 import 'package:provider/provider.dart';
 
+import '../theme/theme_constants.dart';
+
 class BuildEditHabitBottomSheet extends StatefulWidget {
   final HabitModel habit;
   const BuildEditHabitBottomSheet({Key? key, required this.habit})
@@ -27,6 +29,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
 
   @override
   @mustCallSuper
+  // ignore: must_call_super
   void initState() {
     habitName = widget.habit.habitName;
     selectedBreakDays = [...widget.habit.selectedBreakDays];
@@ -47,10 +50,10 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                 GoogleFonts.poppins(fontWeight: FontWeight.w600).fontFamily,
           ).copyWith(
             colorScheme: const ColorScheme.dark(
-              primary: Color(0xFF7856CE),
+              primary: COLOR_PRIMARY,
               onPrimary: Colors.white,
               surface: Color(0xFFF9F7FF),
-              onSurface: Color(0xFF7856CE),
+              onSurface: COLOR_PRIMARY,
             ),
             dialogBackgroundColor: const Color(0xFFF9F7FF),
           ),
@@ -66,7 +69,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.75,
+      height: MediaQuery.of(context).size.height * 0.7,
       child: Stack(
         children: [
           SingleChildScrollView(
@@ -83,7 +86,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color(0xFF7856CE),
+                            color: COLOR_PRIMARY,
                             fontWeight: FontWeight.w600,
                           ),
                           shadows: <Shadow>[
@@ -104,7 +107,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -136,7 +139,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      cursorColor: const Color(0xFF7856CE),
+                      cursorColor: COLOR_PRIMARY,
                       decoration: InputDecoration(
                         hintText: 'Enter the name of the habit',
                         enabledBorder: OutlineInputBorder(
@@ -171,7 +174,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -192,14 +195,14 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                             vertical: 10, horizontal: 15),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Color(0xFFDDD0FC),
+                          color: COLOR_SECONDARY,
                         ),
                         child: Text(
                           displayDateStr(startDate),
                           style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                               fontSize: 14,
-                              color: Color(0xFF7856CE),
+                              color: COLOR_PRIMARY,
                               fontWeight: FontWeight.w400,
                             ),
                             shadows: <Shadow>[
@@ -219,7 +222,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -239,7 +242,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           fontWeight: FontWeight.w600,
                         ),
                         shadows: <Shadow>[
@@ -290,35 +293,7 @@ class _BuildEditHabitBottomSheetState extends State<BuildEditHabitBottomSheet> {
                   children: [
                     Container(
                       decoration: const BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x557856CE),
-                              blurRadius: 24,
-                              offset: Offset(0, 8),
-                            ),
-                          ]),
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          "Delete Habit",
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color(0xFF7856CE),
+                          color: COLOR_PRIMARY,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(

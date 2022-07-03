@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habittracker/theme/theme_constants.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 Widget percentCard(
     String statTitle, IconData icon, double percentValue, String rateLabel) {
   Color indicatorColor;
   if (percentValue < 0.5) {
-    indicatorColor = const Color(0xFFE85F4D);
+    indicatorColor = COLOR_NEGATIVE;
   } else if (percentValue < 0.7) {
-    indicatorColor = const Color(0xFF7856CE);
+    indicatorColor = COLOR_PRIMARY;
   } else {
-    indicatorColor = const Color(0xFFB3D264);
+    indicatorColor = COLOR_POSITIVE;
   }
 
   return Container(
@@ -35,7 +36,7 @@ Widget percentCard(
         children: [
           Icon(
             icon,
-            color: const Color(0xFF7856CE),
+            color: COLOR_PRIMARY,
             size: 20,
           ),
           const SizedBox(
@@ -46,7 +47,7 @@ Widget percentCard(
             style: GoogleFonts.poppins(
               textStyle: const TextStyle(
                 fontSize: 12,
-                color: Color(0xFF7856CE),
+                color: COLOR_PRIMARY,
                 fontWeight: FontWeight.w600,
               ),
               shadows: <Shadow>[
@@ -79,7 +80,7 @@ Widget percentCard(
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 20,
-                    color: Color(0xFF7856CE),
+                    color: COLOR_PRIMARY,
                     fontWeight: FontWeight.w600,
                   ),
                   shadows: <Shadow>[
