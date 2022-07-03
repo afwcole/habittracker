@@ -31,9 +31,8 @@ class _HabitCardButtonState extends State<HabitCardButton> {
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-              color: widget.isCompletionButton
-                  ? COLOR_POSITIVE
-                  : const Color(0xFFCE5670),
+              color:
+                  widget.isCompletionButton ? COLOR_POSITIVE : COLOR_NEGATIVE,
               borderRadius: const BorderRadius.all(
                 Radius.circular(25),
               ),
@@ -47,24 +46,20 @@ class _HabitCardButtonState extends State<HabitCardButton> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              widget.isCompletionButton
-                  ? const Icon(
-                      Icons.done,
-                      color: Colors.white,
-                      size: 19,
-                    )
-                  : const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                      size: 19,
-                    ),
+              Icon(
+                widget.isCompletionButton ? Icons.done : Icons.close,
+                color: Colors.white,
+                size: 19,
+              ),
               Text(
                 widget.isCompletionButton ? "Completed" : "Uncompleted",
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
+                    color: widget.isCompletionButton
+                        ? Colors.white
+                        : Colors.white, // Colors.white,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),

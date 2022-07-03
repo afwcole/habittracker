@@ -6,9 +6,14 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 Widget percentCard(
     String statTitle, IconData icon, double percentValue, String rateLabel) {
   Color indicatorColor;
+
+  if (percentValue.isNaN) {
+    percentValue = 0;
+  }
+
   if (percentValue < 0.5) {
     indicatorColor = COLOR_NEGATIVE;
-  } else if (percentValue < 0.7) {
+  } else if (percentValue < 0.6) {
     indicatorColor = COLOR_PRIMARY;
   } else {
     indicatorColor = COLOR_POSITIVE;
@@ -78,9 +83,9 @@ Widget percentCard(
               Text(
                 "${(percentValue * 100).toStringAsFixed(0)}%",
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     fontSize: 20,
-                    color: COLOR_PRIMARY,
+                    color: indicatorColor,
                     fontWeight: FontWeight.w600,
                   ),
                   shadows: <Shadow>[
