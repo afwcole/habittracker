@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/models/habit_model.dart';
+import 'package:habittracker/providers/user_data_provider.dart';
+import 'package:habittracker/widgets/build_edit_bottom_sheet.dart';
 import 'package:habittracker/widgets/custom_calendar.dart';
 import 'package:habittracker/widgets/range_picker_widget.dart';
 import 'package:habittracker/widgets/streaks_card.dart';
 import 'package:habittracker/widgets/percent_card.dart';
+import 'package:provider/provider.dart';
 
 class AnalyticsPage extends StatefulWidget {
   final HabitModel habit;
@@ -26,6 +29,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   int _selectedRangeInt = 7;
   int calculatedDays = 0;
   int completedDays = 0;
+  String habitName = "";
 
   double getCompletedRate() {
     Map statsInRange = widget.habit.getStatsInRange(_selectedRangeInt);
@@ -44,7 +48,33 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
 
   @override
   Widget build(BuildContext context) {
+    habitName = Provider.of<UserDataProvider>(context, listen: true)
+        .habitList
+        .firstWhere((element) => element == widget.habit)
+        .habitName;
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        backgroundColor: const Color(0xFF7856CE),
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.8),
+            context: context,
+            backgroundColor: const Color(0xFFF9F7FF),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+            builder: (context) =>
+                BuildEditHabitBottomSheet(habit: widget.habit),
+          );
+        },
+        child: const Icon(
+          Icons.edit,
+          size: 32,
+        ),
+      ),
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
@@ -64,7 +94,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       }),
                   Expanded(
                     child: AutoSizeText(
-                      widget.habit.habitName,
+                      habitName,
                       overflow: TextOverflow.ellipsis,
                       minFontSize: 16,
                       maxLines: 2,
@@ -108,7 +138,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 height: 45,
               ),
               Text(
-                "30 Day Stats",
+                "$_selectedRange Stats",
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 16,

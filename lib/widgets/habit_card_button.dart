@@ -29,6 +29,20 @@ class _HabitCardButtonState extends State<HabitCardButton> {
         },
         child: Container(
           padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              color: widget.isCompletionButton
+                  ? const Color(0xFFB3D264)
+                  : const Color(0xFF7856CE),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(25),
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x337856CE),
+                  blurRadius: 24,
+                  offset: Offset(0, 8),
+                ),
+              ]),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -55,20 +69,6 @@ class _HabitCardButtonState extends State<HabitCardButton> {
               ),
             ],
           ),
-          decoration: BoxDecoration(
-              color: widget.isCompletionButton
-                  ? const Color(0xFFB3D264)
-                  : const Color(0xFF7856CE),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(25),
-              ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x337856CE),
-                  blurRadius: 24,
-                  offset: Offset(0, 8),
-                ),
-              ]),
         ),
       ),
     );

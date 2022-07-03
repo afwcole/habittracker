@@ -42,7 +42,7 @@ String weekdayToISOString(int weekday, int noOfLetters) {
 }
 
 String displayDateStr(DateTime date) {
-  return "${_weekdays3[date.weekday - 1]}, ${date.day}th ${_months[date.month - 1]}";
+  return "${_weekdays3[date.weekday - 1]}, ${date.day} ${_months[date.month - 1]}";
 }
 
 String monthToISOString(int month) {

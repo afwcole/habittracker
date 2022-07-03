@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habittracker/functions/date_helper.dart';
 import 'package:habittracker/providers/user_data_provider.dart';
@@ -13,91 +14,121 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UserDataProvider>(
       builder: (context, userDataProvider, child) => SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SafeArea(
-            bottom: false,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        bottom: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 36),
+                  Text(
+                    "Habits",
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 32,
+                        color: Color(0xFF7856CE),
+                        fontWeight: FontWeight.w800,
+                      ),
+                      shadows: <Shadow>[
+                        const Shadow(
+                          offset: Offset(0, 8),
+                          blurRadius: 24,
+                          color: Color(0x337856CE),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 36),
+                  Text(
+                    monthToISOString(DateTime.now().month),
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF7856CE),
+                        fontWeight: FontWeight.w400,
+                      ),
+                      shadows: <Shadow>[
+                        const Shadow(
+                          offset: Offset(0, 8),
+                          blurRadius: 24,
+                          color: Color(0x337856CE),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const HorizontalCalendar(),
+                  const SizedBox(height: 39),
+                  Text(
+                    "Streaks",
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 24,
+                        color: Color(0xFF7856CE),
+                        fontWeight: FontWeight.w600,
+                      ),
+                      shadows: <Shadow>[
+                        const Shadow(
+                          offset: Offset(0, 8),
+                          blurRadius: 24,
+                          color: Color(0x337856CE),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                ],
+              ),
+            ),
+            Column(
               children: [
-                const SizedBox(height: 36),
-                Text(
-                  "Habits",
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 32,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w800,
-                    ),
-                    shadows: <Shadow>[
-                      const Shadow(
-                        offset: Offset(0, 8),
-                        blurRadius: 24,
-                        color: Color(0x337856CE),
+                ...userDataProvider.habitList.map((habit) {
+                  return Column(children: [
+                    Slidable(
+                      key: const ValueKey(0),
+                      endActionPane: ActionPane(
+                        extentRatio: 0.3,
+                        motion: const ScrollMotion(),
+                        children: [
+                          RawMaterialButton(
+                            onPressed: () {
+                              userDataProvider.removeHabitFromHabitList(habit);
+                            },
+                            elevation: 1.0,
+                            fillColor: Colors.red,
+                            padding: const EdgeInsets.all(10.0),
+                            shape: const CircleBorder(),
+                            child: const Icon(
+                              Icons.delete,
+                              size: 30.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 36),
-                Text(
-                  monthToISOString(DateTime.now().month),
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w400,
+                      child: HabitCard(habit: habit),
                     ),
-                    shadows: <Shadow>[
-                      const Shadow(
-                        offset: Offset(0, 8),
-                        blurRadius: 24,
-                        color: Color(0x337856CE),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const HorizontalCalendar(),
-                const SizedBox(height: 39),
-                Text(
-                  "Streaks",
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 24,
-                      color: Color(0xFF7856CE),
-                      fontWeight: FontWeight.w600,
-                    ),
-                    shadows: <Shadow>[
-                      const Shadow(
-                        offset: Offset(0, 8),
-                        blurRadius: 24,
-                        color: Color(0x337856CE),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  children: [
-                    ...userDataProvider.habitList.map((habit) {
-                      return Column(children: [
-                        HabitCard(habit: habit),
-                        const SizedBox(
-                          height: 25,
-                        )
-                      ]);
-                    }),
-                  ],
-                ),
-                const SizedBox(
-                  height: 80,
-                )
+                    const SizedBox(
+                      height: 25,
+                    )
+                  ]);
+                }),
               ],
             ),
-          )),
+            const SizedBox(
+              height: 80,
+            )
+          ],
+        ),
+      )),
     );
   }
 }

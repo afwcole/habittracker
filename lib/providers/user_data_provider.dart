@@ -41,11 +41,6 @@ class UserDataProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? _encodedHabits = prefs.getString("habitList");
 
-    //use this for testing empty habitlist otherwise remove it Debugging purposes only
-    if (false) {
-      return;
-    }
-
     if (_encodedHabits != null) {
       //De-serializes into the List Object
       _habitList = decodeHabitList(_encodedHabits);
@@ -71,6 +66,27 @@ class UserDataProvider extends ChangeNotifier {
     _habitList.add(HabitModel(_habitList.length, habitName, startDate,
         selectedDays, {}, notificationSwitch));
     _habitList.last.sortHabitHistory();
+    notifyListeners();
+    savePreferences();
+  }
+
+  void editHabitInList(HabitModel habit, String habitName, DateTime startDate,
+      List<int> selectedDays, bool notificationSwitch) async {
+    for (var i = 0; i < _habitList.length; i++) {
+      if (_habitList[i] == habit) {
+        habit.habitName = habitName;
+        habit.startDate = startDate;
+        habit.selectedBreakDays = selectedDays;
+        habit.notification = notificationSwitch;
+        break;
+      }
+    }
+    notifyListeners();
+    savePreferences();
+  }
+
+  void removeHabitFromHabitList(HabitModel habit) {
+    _habitList.remove(habit);
     notifyListeners();
     savePreferences();
   }

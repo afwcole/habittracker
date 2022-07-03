@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BreakDaysSection extends StatefulWidget {
-  final List<int> selectedBreakDays;
+  final List selectedBreakDays;
 
   const BreakDaysSection({Key? key, required this.selectedBreakDays})
       : super(key: key);

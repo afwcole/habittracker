@@ -5,11 +5,11 @@ import 'package:habittracker/providers/app_data_provider.dart';
 
 class HabitModel {
   final int habitID;
-  final String habitName;
-  final DateTime startDate;
-  final List selectedBreakDays;
+  String habitName;
+  DateTime startDate;
+  List selectedBreakDays;
   Map habitHistory;
-  final bool notification;
+  bool notification;
 
   HabitModel(this.habitID, this.habitName, this.startDate,
       this.selectedBreakDays, this.habitHistory, this.notification);
