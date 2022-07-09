@@ -1,16 +1,24 @@
-# habittracker
+# Habit Tracker
+## A Simple Habit Tracking Cross-Platform App
 
-A new Flutter project.
+This application includes...
+- a Homepage
+- a Analytics Page
+- a Habit Statistics & Data Analytics
+- and other UI pages and elements.
 
-## Getting Started
+## Demo of Habit Tracker UI
+<img src="images/Chop%20Chop%20Screenshots%20all.jpg" width="400"> <img src="images/chopchop.gif" width="250">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+This application is yet to be fully completed.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Requirements
+* Any Operating System (ie. MacOS X, Linux, Windows)
+* Any IDE with Flutter SDK installed (ie.  Android Studio, VSCode, IntelliJ, etc)
+* Knowledge of Dart and Flutter
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If this Repo is useful to you kindly give a star. thanks :)
+
+Designed by yours truly with Figma.
+Coded by yours truly with Flutter.
