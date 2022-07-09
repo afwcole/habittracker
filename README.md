@@ -4,8 +4,9 @@
 This application includes...
 - a Homepage
 - a Analytics Page
-- Empty State Page
+- a Empty State Page
 - a Habit Statistics & Data Analytics
+- a Habit Editing & Creation Bottom Sheet
 - and other UI pages and elements.
 
 ## Demo of Habit Tracker UI
