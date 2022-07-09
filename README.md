@@ -4,6 +4,7 @@
 This application includes...
 - a Homepage
 - a Analytics Page
+- Empty State Page
 - a Habit Statistics & Data Analytics
 - and other UI pages and elements.
 
