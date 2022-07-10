@@ -10,7 +10,7 @@ This application includes...
 - and other UI pages and elements.
 
 ## Demo of Habit Tracker UI
-<img src="images/habit_screenshots.png" width="400"> <img src="images/chopchop.gif" width="250">
+<img src="images/habit_screenshots.png" width="400"> <img src="images/app_demo.gif" width="250">
 
 
 This application is yet to be fully completed.
