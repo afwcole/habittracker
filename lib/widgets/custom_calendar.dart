@@ -270,7 +270,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                   textStyle: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -308,7 +308,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                   textStyle: const TextStyle(
                                     fontSize: 12,
                                     color: COLOR_PRIMARY,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -328,7 +328,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                             width: 110,
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: COLOR_PRIMARY,
+                                color: COLOR_NEGATIVE,
                                 borderRadius: BorderRadius.circular(25),
                                 boxShadow: const [
                                   BoxShadow(
@@ -344,7 +344,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                                   textStyle: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),

@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
                 ...userDataProvider.habitList.map((habit) {
                   return Column(children: [
                     Slidable(
-                      key: const ValueKey(0),
+                      key: ValueKey(habit.habitID),
                       endActionPane: ActionPane(
                         extentRatio: 0.3,
                         motion: const ScrollMotion(),
@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
                               userDataProvider.removeHabitFromHabitList(habit);
                             },
                             elevation: 1.0,
-                            fillColor: Colors.red,
+                            fillColor: COLOR_NEGATIVE,
                             padding: const EdgeInsets.all(10.0),
                             shape: const CircleBorder(),
                             child: const Icon(
@@ -117,9 +117,6 @@ class HomePage extends StatelessWidget {
                       ),
                       child: HabitCard(habit: habit),
                     ),
-                    const SizedBox(
-                      height: 25,
-                    )
                   ]);
                 }),
               ],

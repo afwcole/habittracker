@@ -23,7 +23,7 @@ class _HabitCardState extends State<HabitCard> {
   Widget build(BuildContext context) {
     return Consumer<UserDataProvider>(
         builder: (context, userDataProvider, child) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 25),
               decoration: const BoxDecoration(
                   color: COLOR_SECONDARY,
                   borderRadius: BorderRadius.all(
@@ -32,7 +32,7 @@ class _HabitCardState extends State<HabitCard> {
                   boxShadow: [
                     BoxShadow(
                       color: Color(0x337856CE),
-                      blurRadius: 24,
+                      blurRadius: 20,
                       offset: Offset(0, 8),
                     ),
                   ]),
